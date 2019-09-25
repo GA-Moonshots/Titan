@@ -15,13 +15,13 @@ import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
-public class MecanumDrive extends Command {
+public class xDriveCommand extends Command {
 
   private boolean notMoving = true;
   private boolean driveStraight = false;
   private double driveStraightAt;
 
-  public MecanumDrive() {
+  public xDriveCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivymcDriveDriverson);
   }
@@ -90,7 +90,7 @@ public class MecanumDrive extends Command {
       double difference = driveStraightAt - Robot.drivymcDriveDriverson.gyro.getAngle(); 
       Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -(difference * .03)); 
     } else {
-      Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 
+      Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, valueleftx*0.5); 
     }
     //*/
     //Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 

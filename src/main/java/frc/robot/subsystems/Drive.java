@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.xDriveCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 
@@ -32,10 +34,13 @@ public class Drive extends Subsystem {
 
   // drive system
   public DifferentialDrive drive;
+  public MecanumDrive dMecanumDrive;
 
   // grouping the motors
-  public SpeedControllerGroup rightSide;
-  public SpeedControllerGroup leftSide;
+  public SpeedControllerGroup frontRightMotor;
+  public SpeedControllerGroup frontLeftMotor;
+  public SpeedControllerGroup backRightMotor;
+  public SpeedControllerGroup backLeftMotor;
 
   public double pidTune;
 
@@ -50,11 +55,15 @@ public class Drive extends Subsystem {
     rightMotor2 = new Jaguar(RobotMap.RIGHT2PORT);
     
     // setting up the motor groups
-    rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
-    leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
+    frontRightMotor = new SpeedControllerGroup(rightMotor1);
+    frontLeftMotor = new SpeedControllerGroup(leftMotor1);
+    backRightMotor = new SpeedControllerGroup(rightMotor2);
+    backLeftMotor = new SpeedControllerGroup(leftMotor2);
+
 
     // making differential drive  
-    drive = new DifferentialDrive(rightSide, leftSide);
+    //drive = new DifferentialDrive(rightSide, leftSide);
+    dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
   }
 
@@ -62,7 +71,8 @@ public class Drive extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new DriveCommand()); // THIS IS HOW WE DRIVE THE ROBOT
+    setDefaultCommand(new DriveCommand()); // THIS IS HOW WE DRIVE THE
+                                                                                         // ROBOT
   }
 
 

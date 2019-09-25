@@ -1,4 +1,5 @@
 /*----------------------------------------------------------------------------*/
+
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
@@ -17,9 +18,9 @@ import frc.robot.Robot;
  */
 public class DriveCommand extends Command {
 
-  private boolean notMoving = true;
-  private boolean driveStraight = false;
-  private double driveStraightAt;
+  //private boolean notMoving = true;
+  //private boolean driveStraight = false;
+ // private double driveStraightAt;
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -29,7 +30,7 @@ public class DriveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.drivymcDriveDriverson.drive.arcadeDrive(Robot.m_oi., target);
+    //Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -56,12 +57,14 @@ public class DriveCommand extends Command {
                 break;
       case 315: break;
     }
-    SmartDashboard.putBoolean("StraightAssist", driveStraight);
+    //SmartDashboard.putBoolean("StraightAssist", driveStraight);
     //MANUAL DEAD ZONE
     double dead = 0.15;
 
     double valueleftx = OI.xbox.getRawAxis(0);
     double valuelefty = OI.xbox.getRawAxis(1);
+    double valuerightx = OI.xbox.getRawAxis(4);
+    double valuerighty = OI.xbox.getRawAxis(5);
 
     if(Math.abs(valueleftx) < dead){
       valueleftx = 0;
@@ -69,10 +72,18 @@ public class DriveCommand extends Command {
     if(Math.abs(valuelefty) < dead){
       valuelefty = 0;
     }
+    if(Math.abs(valuerightx) < dead){
+      valuerightx = 0;
+    }
+    if(Math.abs(valuerighty) < dead){
+      valuerighty = 0;
+    }
 
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valueleftx, valuerightx, valuelefty);
+    
     ///*
     // trigger assist driving straight 
-    if(valuelefty < 0 && valueleftx == 0 && notMoving){
+    /*if(valuelefty < 0 && valueleftx == 0 && notMoving){
       notMoving = false;
       driveStraight = true;
       this.driveStraightAt = Robot.drivymcDriveDriverson.gyro.getAngle();
@@ -88,10 +99,11 @@ public class DriveCommand extends Command {
 
     if(driveStraight){
       double difference = driveStraightAt - Robot.drivymcDriveDriverson.gyro.getAngle(); 
-      Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -(difference * .03)); 
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valuelefty, -(difference * .03), 0); 
     } else {
-      Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valuelefty, -valueleftx*0.5, 0); 
     }
+    */
     //*/
     //Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 
 
@@ -108,14 +120,14 @@ public class DriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drivymcDriveDriverson.drive.arcadeDrive(0,0);
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.drivymcDriveDriverson.drive.arcadeDrive(0,0);
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }
