@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.GripInCommand;
+import frc.robot.commands.GripOutCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,8 +35,8 @@ public class OI {
     
     public OI(){
   
-      yButton.whileHeld(new ExampleCommand());
-      aButton.whileHeld(new ExampleCommand());
+      yButton.whileHeld(new GripInCommand());
+      aButton.whileHeld(new GripOutCommand());
       leftBumper.whenPressed(new ExampleCommand());
       rightBumper.whileHeld(new ExampleCommand());
       leftStickClick.whenPressed(new ExampleCommand());

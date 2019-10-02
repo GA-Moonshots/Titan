@@ -16,6 +16,8 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.xDriveCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
+
 
 
 /**
@@ -25,6 +27,9 @@ public class Drive extends Subsystem {
   
   // here's a gyro
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  AnalogInput analogSensor = new AnalogInput(0);
+  
+  
 
   // here's some motors
   public Jaguar leftMotor1;
@@ -46,7 +51,7 @@ public class Drive extends Subsystem {
 
   public Drive(){    
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
-
+    
     //gyro.reset();
     // linking motors to ports
     leftMotor1 = new Jaguar(RobotMap.LEFT1PORT);
@@ -64,6 +69,12 @@ public class Drive extends Subsystem {
     // making differential drive  
     //drive = new DifferentialDrive(rightSide, leftSide);
     dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+
+    int raw = analogSensor.getValue();
+    double volts = analogSensor.getVoltage();
+    int averageRaw = analogSensor.getAverageValue();
+    double averageVolts = analogSensor.getAverageVoltage();
+    AnalogInput.setGlobalSampleRate(62500);
 
   }
 
