@@ -27,7 +27,6 @@ public class Drive extends Subsystem {
   
   // here's a gyro
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-  AnalogInput analogSensor = new AnalogInput(0);
   
   
 
@@ -70,12 +69,14 @@ public class Drive extends Subsystem {
     //drive = new DifferentialDrive(rightSide, leftSide);
     dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
-    int raw = analogSensor.getValue();
-    double volts = analogSensor.getVoltage();
-    int averageRaw = analogSensor.getAverageValue();
-    double averageVolts = analogSensor.getAverageVoltage();
-    AnalogInput.setGlobalSampleRate(62500);
+    //int raw = analogSensor.getValue();
+    //double volts = analogSensor.getVoltage();
+    //int averageRaw = analogSensor.getAverageValue();
+    
+    //AnalogInput.setGlobalSampleRate(62500);
+    
 
+    
   }
 
   @Override

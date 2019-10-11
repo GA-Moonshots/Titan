@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Gripper;
@@ -31,6 +32,8 @@ public class Robot extends TimedRobot {
   public static Drive drivymcDriveDriverson = new Drive();
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  AnalogInput analogSensor = new AnalogInput(0);
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -124,7 +127,9 @@ public class Robot extends TimedRobot {
   
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+
+    double averageVolts = (analogSensor.getAverageVoltage()/.0048828125) * 5;
+    System.out.println(averageVolts);
   }
 
   /**
