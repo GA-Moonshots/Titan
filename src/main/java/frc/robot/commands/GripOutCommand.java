@@ -28,8 +28,8 @@ public class GripOutCommand extends Command {
   @Override
   protected void execute() {
     // if we triggered a setPoint
-    Robot.gripper.motorOne.set(0.45);
-    Robot.gripper.motorTwo.set(-0.45);
+    Robot.gripper.motorOne.set(0.18);
+    Robot.gripper.motorTwo.set(-0.18);
   } 
 
   // Make this return true when this Command no longer needs to run execute()

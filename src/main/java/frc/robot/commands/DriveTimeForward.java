@@ -12,45 +12,49 @@ import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
-public class GripInCommand extends Command {
 
-  public GripInCommand() {
+public class DriveTimeForward extends Command {
+
+  private int count = 0;
+  private double time;
+
+  public DriveTimeForward(double time) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.gripper);
+    requires(Robot.drivymcDriveDriverson);
+    this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    count = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // if we triggered a setPoint
-    Robot.gripper.motorOne.set(-0.18); //-0.18 and 0.18
-    Robot.gripper.motorTwo.set(0.18);
-  }
+      count ++;
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0.15, 0, 0);
+    }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return count >= time*30;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.gripper.motorOne.set(0.0);
-    Robot.gripper.motorTwo.set(0.0);
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.gripper.motorOne.set(0.0);
-    Robot.gripper.motorTwo.set(0.0);
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

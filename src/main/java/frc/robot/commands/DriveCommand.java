@@ -105,7 +105,6 @@ public class DriveCommand extends Command {
     }
     */
     //*/
-    //Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 
 
 
 

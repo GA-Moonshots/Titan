@@ -15,6 +15,7 @@ import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
+/*
 public class xDriveCommand extends Command {
 
   private boolean notMoving = true;
@@ -92,7 +93,7 @@ public class xDriveCommand extends Command {
     } else {
       Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, valueleftx*0.5); 
     }
-    //*/
+    //
     //Robot.drivymcDriveDriverson.drive.arcadeDrive(-valuelefty, -valueleftx*0.5); 
 
 
@@ -119,3 +120,4 @@ public class xDriveCommand extends Command {
   }
 
 }
+*/

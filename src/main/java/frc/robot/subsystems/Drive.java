@@ -14,10 +14,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.xDriveCommand;
+//import frc.robot.commands.xDriveCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Ultrasonic.Unit;
+import edu.wpi.first.wpilibj.SendableBase;
 
 
 /**
@@ -27,6 +28,9 @@ public class Drive extends Subsystem {
   
   // here's a gyro
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  public Ultrasonic ultrasonic1 = new Ultrasonic(0, 1, Unit.kInches);
+  public Ultrasonic ultrasonic2 = new Ultrasonic(2, 3, Unit.kInches);
+  //public Ultrasonic ultrasonic = new Ultrasonic(0, 1);
   
   
 
@@ -37,7 +41,7 @@ public class Drive extends Subsystem {
   public Jaguar rightMotor2;
 
   // drive system
-  public DifferentialDrive drive;
+  //public DifferentialDrive drive;
   public MecanumDrive dMecanumDrive;
 
   // grouping the motors
@@ -45,6 +49,10 @@ public class Drive extends Subsystem {
   public SpeedControllerGroup frontLeftMotor;
   public SpeedControllerGroup backRightMotor;
   public SpeedControllerGroup backLeftMotor;
+  public SpeedControllerGroup rightSide;
+  public SpeedControllerGroup leftSide;
+
+
 
   public double pidTune;
 
@@ -63,15 +71,19 @@ public class Drive extends Subsystem {
     frontLeftMotor = new SpeedControllerGroup(leftMotor1);
     backRightMotor = new SpeedControllerGroup(rightMotor2);
     backLeftMotor = new SpeedControllerGroup(leftMotor2);
-
+    rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
+    leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
 
     // making differential drive  
     //drive = new DifferentialDrive(rightSide, leftSide);
     dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+    //drive = new DifferentialDrive (leftSide, rightSide);
 
     //int raw = analogSensor.getValue();
     //double volts = analogSensor.getVoltage();
     //int averageRaw = analogSensor.getAverageValue();
+    ultrasonic1.setAutomaticMode(true);
+    ultrasonic2.setAutomaticMode(true);
     
     //AnalogInput.setGlobalSampleRate(62500);
     
@@ -83,8 +95,7 @@ public class Drive extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new DriveCommand()); // THIS IS HOW WE DRIVE THE
-                                                                                         // ROBOT
+    setDefaultCommand(new DriveCommand()); // THIS IS HOW WE DRIVE THE // ROBOT
   }
 
 

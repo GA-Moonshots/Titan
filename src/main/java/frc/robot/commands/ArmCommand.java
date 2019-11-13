@@ -8,28 +8,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
-public class GripInCommand extends Command {
+public class ArmCommand extends Command {
 
-  public GripInCommand() {
+  public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.gripper);
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.arm.armMotor.set(0.0);
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // if we triggered a setPoint
-    Robot.gripper.motorOne.set(-0.18); //-0.18 and 0.18
-    Robot.gripper.motorTwo.set(0.18);
+    if(OI.xbox.getRawAxis(3) != 0)
+    {
+      Robot.arm.armMotor.set(0.15);
+    }
+    else if(OI.xbox.getRawAxis(2) != 0)
+    {
+      Robot.arm.armMotor.set(-0.15);
+    }
+    else{    
+      Robot.arm.armMotor.set(0);
+      
+    }
+        
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,16 +54,14 @@ public class GripInCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.gripper.motorOne.set(0.0);
-    Robot.gripper.motorTwo.set(0.0);
+    Robot.arm.armMotor.set(0.0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.gripper.motorOne.set(0.0);
-    Robot.gripper.motorTwo.set(0.0);
+    Robot.arm.armMotor.set(0.0);
   }
 
 }

@@ -17,6 +17,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Gripper;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Arm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,12 +28,13 @@ import frc.robot.subsystems.Drive;
  */
 public class Robot extends TimedRobot {
   public static Gripper gripper = new Gripper();
+  public static Arm arm = new Arm();
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static Drive drivymcDriveDriverson = new Drive();
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-  AnalogInput analogSensor = new AnalogInput(0);
+  //AnalogInput analogSensor = new AnalogInput(0);
 
 
   /**
@@ -128,8 +130,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    double averageVolts = (analogSensor.getAverageVoltage()/.0048828125) * 5;
-    System.out.println(averageVolts);
+    /*double averageVolts = (analogSensor.getAverageVoltage()/.0048828125) * 5;
+    System.out.println(averageVolts);*/
   }
 
   /**

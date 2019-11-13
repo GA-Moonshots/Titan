@@ -29,8 +29,8 @@ public class RobotMap {
   public static int RIGHT1PORT = 3;
   public static int RIGHT2PORT = 2;
   public static int ELEVATORPORT = 6;
-  public static int ARMPORT = 7;
-  public static int ORANGEGRIPPER = 4;
+  public static int ARMPORT = 4;
+  public static int ORANGEGRIPPER = 7;
   public static int BLACKGRIPPER = 5;
 
   // DIO
