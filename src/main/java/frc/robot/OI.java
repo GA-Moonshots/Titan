@@ -10,12 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import frc.robot.commands.DriveAdjustRight;
+import frc.robot.commands.DriveAdjustRight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GripInCommand;
 import frc.robot.commands.GripOutCommand;
-//import frc.robot.commands.DriveToWall;
-//import frc.robot.commands.SquareUp;
+import frc.robot.commands.DriveToWall;
+import frc.robot.commands.SquareUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -41,13 +41,13 @@ public class OI {
       yButton.whileHeld(new GripInCommand());
       aButton.whileHeld(new GripOutCommand());
       leftBumper.whenPressed(new ExampleCommand());
-      //rightBumper.whenPressed(new DriveAdjustRight());
+      rightBumper.whenPressed(new DriveAdjustRight());
       leftStickClick.whenPressed(new ExampleCommand());
       rightStickClick.whenPressed(new ExampleCommand());
       startButton.whileHeld(new ExampleCommand());
       selectButton.whenPressed(new ExampleCommand());
-      //xButton.whenPressed(new DriveToWall());
-      bButton.whenPressed(new ExampleCommand());
+      xButton.whenPressed(new DriveToWall());
+      bButton.whenPressed(new SquareUp());
     }
   
     

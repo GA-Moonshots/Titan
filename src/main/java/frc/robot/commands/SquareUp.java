@@ -24,18 +24,18 @@ public class SquareUp extends Command {
   @Override
   protected void execute() {
     if(Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() > Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches()){
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0.2, 0, 0);
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-0.3, 0, 0);
     }
     
-    if(Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches() > Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches()){
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-0.2, 0, 0);
+    else if(Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches() > Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches()){
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0.3, 0, 0);
     }
   }
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() == Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches();
+    return Math.abs(Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() - Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches()) < 2;
   }
 
   // Called once after isFinished returns true
