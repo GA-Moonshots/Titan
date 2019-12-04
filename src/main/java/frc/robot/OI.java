@@ -41,7 +41,7 @@ public class OI {
       yButton.whileHeld(new GripInCommand());
       aButton.whileHeld(new GripOutCommand());
       leftBumper.whenPressed(new ExampleCommand());
-      rightBumper.whenPressed(new DriveAdjustRight());
+      rightBumper.whenPressed(new ExampleCommand());
       leftStickClick.whenPressed(new ExampleCommand());
       rightStickClick.whenPressed(new ExampleCommand());
       startButton.whileHeld(new ExampleCommand());
