@@ -19,7 +19,7 @@ public class SquareUp extends Command {
     
     
   }
-
+/*
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
     double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
@@ -32,7 +32,7 @@ public class SquareUp extends Command {
     double error = Math.abs(sensor1 - sensor2);
 
     // determine the power output neutral of direction
-    double output = Math.abs(error / requestedRotation) * MAX_POWER;
+    double output = Math.abs(error) * MAX_POWER;
     if(output < MIN_POWER) output = MIN_POWER;
     if(output > MAX_POWER) output = MAX_POWER;
 
@@ -54,6 +54,7 @@ public class SquareUp extends Command {
     }
   }
 
+  */
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
