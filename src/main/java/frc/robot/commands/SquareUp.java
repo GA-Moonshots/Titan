@@ -2,12 +2,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
  */
 
 public class SquareUp extends Command {
 
+  private double target;
+  private int check;
+
+  private Drive drive = Robot.drivymcDriveDriverson;
+  
   public SquareUp() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivymcDriveDriverson);
@@ -16,10 +23,10 @@ public class SquareUp extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+    //target = drive.gyro.getAngle() + requestedRotation;
+    check = 0;
     
   }
-/*
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
     double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
@@ -43,7 +50,7 @@ public class SquareUp extends Command {
 
     // determine the direction
     // if I was trying to go a positive angle change from the start
-    if(requestedRotation > 0){
+    if(sensor1 > sensor2){
       if(error > 0) return -output; // move in a positive direction
       else return output; // compensate for over-turning by going a negative direction
     }
@@ -54,18 +61,11 @@ public class SquareUp extends Command {
     }
   }
 
-  */
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() > Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches()){
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0.3, 0, 0);
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
     }
-    
-    else if(Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches() > Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches()){
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-0.3, 0, 0);
-    }
-  }
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
