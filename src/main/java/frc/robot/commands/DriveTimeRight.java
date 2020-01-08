@@ -9,17 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-
 /**
  * Responding to motor control. Runs infinitely
  */
 
-public class DriveTimeReverse extends Command {
+public class DriveTimeRight extends Command {
 
   private int count = 0;
   private double time;
 
-  public DriveTimeReverse(double time) {
+  public DriveTimeRight(double time) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivymcDriveDriverson);
     this.time = time;
@@ -35,7 +34,7 @@ public class DriveTimeReverse extends Command {
   @Override
   protected void execute() {
       count ++;
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0.15);
+      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0.30, 0);
     }
 
 

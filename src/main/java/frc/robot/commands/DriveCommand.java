@@ -79,7 +79,7 @@ public class DriveCommand extends Command {
       valuerighty = 0;
     }
 
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valueleftx, valuerightx, valuelefty);
+    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valuerightx, valueleftx, valuelefty);
     
     ///*
     // trigger assist driving straight 

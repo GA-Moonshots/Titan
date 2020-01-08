@@ -10,6 +10,8 @@ import frc.robot.subsystems.Drive;
 
 public class SquareUp extends Command {
 
+  double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
+  double sensor2 = Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches();
   private double target;
   private int check;
 
@@ -29,10 +31,8 @@ public class SquareUp extends Command {
   }
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
-    double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
-    double sensor2 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
-    double MAX_POWER = 0.7; // cap the power 
-    double MIN_POWER = 0.45; // lowest effective power
+    double MAX_POWER = 0.45; // cap the power 
+    double MIN_POWER = 0.20; // lowest effective power
     int ENOUGH_CHECKS = 15; // how many times do we pass our target until we're satisfied?
 
     // determine the error
@@ -64,8 +64,10 @@ public class SquareUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
-    }
+      //if(java.lang.Double.isInfinite(sensor1) == false && java.lang.Double.isInfinite(sensor2) == false){
+        Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
+      }
+    //}
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override

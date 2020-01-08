@@ -32,11 +32,11 @@ public class ArmCommand extends Command {
   protected void execute() {
     if(OI.xbox.getRawAxis(3) != 0)
     {
-      Robot.arm.armMotor.set(0.25);
+      Robot.arm.armMotor.set(0.5*(OI.xbox.getRawAxis(3)));
     }
     else if(OI.xbox.getRawAxis(2) != 0)
     {
-      Robot.arm.armMotor.set(-0.25);
+      Robot.arm.armMotor.set(-0.25*(OI.xbox.getRawAxis(2)));
     }
     else{    
       Robot.arm.armMotor.set(0);

@@ -16,7 +16,6 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
 //import frc.robot.commands.xDriveCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.SendableBase;
 
@@ -28,8 +27,8 @@ public class Drive extends Subsystem {
   
   // here's a gyro
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-  public Ultrasonic ultrasonic1 = new Ultrasonic(0, 1, Unit.kInches);
-  public Ultrasonic ultrasonic2 = new Ultrasonic(2, 3, Unit.kInches);
+  public UltrasonicWrapper ultrasonic1 = new UltrasonicWrapper(0, 1, Unit.kInches);
+  public UltrasonicWrapper ultrasonic2 = new UltrasonicWrapper(2, 3, Unit.kInches);
   //public Ultrasonic ultrasonic = new Ultrasonic(0, 1);
   
   

@@ -16,6 +16,8 @@ import frc.robot.commands.GripInCommand;
 import frc.robot.commands.GripOutCommand;
 import frc.robot.commands.DriveToWall;
 import frc.robot.commands.SquareUp;
+import frc.robot.commands.DumpClose;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -38,7 +40,7 @@ public class OI {
     
     public OI(){
   
-      yButton.whileHeld(new GripInCommand());
+      yButton.whenPressed(new DumpClose());
       aButton.whileHeld(new GripOutCommand());
       leftBumper.whenPressed(new ExampleCommand());
       rightBumper.whenPressed(new ExampleCommand());

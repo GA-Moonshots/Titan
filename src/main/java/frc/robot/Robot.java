@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
+import frc.robot.commands.DriveToAngle;
+import frc.robot.commands.DriveToWall;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Gripper;
@@ -44,8 +46,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("Drive FWD", new DriveToWall());
+    m_chooser.addOption("Rotate 90 Degrees", new DriveToAngle(90));
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -59,8 +61,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-  }
+    SmartDashboard.putNumber("Distance Wrapper", drivymcDriveDriverson.ultrasonic1.getRangeInches());
+    SmartDashboard.putNumber("Distance Wrapper 2", drivymcDriveDriverson.ultrasonic2.getRangeInches());
 
+  }
+ 
   /**
    * This function is called once each time the robot enters Disabled mode.
    * You can use it to reset any subsystem information you want to clear when
