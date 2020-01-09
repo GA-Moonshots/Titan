@@ -9,14 +9,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmCommand;
 
 /**
  * The system based around the elevator lift motor
  */
-public class Arm extends Subsystem {
+public class Arm extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   // here's a motor i'm declaring here, sorry Mr. A it's not in a command

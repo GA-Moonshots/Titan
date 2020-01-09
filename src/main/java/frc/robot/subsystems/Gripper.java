@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
@@ -16,7 +16,7 @@ import frc.robot.RobotMap;
 /**
  * * Instantiates the drive system with a gyro
  */
-public class Gripper extends Subsystem {
+public class Gripper extends SubsystemBase {
   
 
   // here's some motors

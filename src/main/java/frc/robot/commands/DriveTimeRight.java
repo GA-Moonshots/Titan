@@ -7,32 +7,32 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
 
-public class DriveTimeRight extends Command {
+public class DriveTimeRight extends CommandBase {
 
   private int count = 0;
   private double time;
 
   public DriveTimeRight(double time) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivymcDriveDriverson);
+    addRequirements(Robot.drivymcDriveDriverson);
     this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     count = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
       count ++;
       Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0.30, 0);
     }
@@ -40,20 +40,13 @@ public class DriveTimeRight extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return count >= time*30;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public void end(boolean interrupted) {
     Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 

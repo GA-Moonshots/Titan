@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Drive;
@@ -8,7 +8,7 @@ import frc.robot.subsystems.Drive;
  * Responding to motor control. Runs infinitely
  */
 
-public class SquareUp extends Command {
+public class SquareUp extends CommandBase {
 
   double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
   double sensor2 = Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches();
@@ -19,12 +19,12 @@ public class SquareUp extends Command {
   
   public SquareUp() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivymcDriveDriverson);
+    addRequirements(Robot.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     //target = drive.gyro.getAngle() + requestedRotation;
     check = 0;
     
@@ -63,7 +63,7 @@ public class SquareUp extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
       //if(java.lang.Double.isInfinite(sensor1) == false && java.lang.Double.isInfinite(sensor2) == false){
         Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
       }
@@ -71,23 +71,15 @@ public class SquareUp extends Command {
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     System.out.println("Right sensor reads " + Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches() + " and left sensor reads " + Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches());
     return Math.abs(Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() - Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches()) < 1;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
-
   }
 
 }

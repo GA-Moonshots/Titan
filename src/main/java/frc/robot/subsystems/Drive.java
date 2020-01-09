@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.SendableBase;
 /**
  * * Instantiates the drive system with a gyro
  */
-public class Drive extends Subsystem {
+public class Drive extends SubsystemBase {
   
   // here's a gyro
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro();

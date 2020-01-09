@@ -8,8 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj2.buttons.Buttons;
+import edu.wpi.first.wpilibj2.buttons.JoystickButton;
 import frc.robot.commands.DriveAdjustRight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GripInCommand;

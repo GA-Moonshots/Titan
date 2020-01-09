@@ -7,7 +7,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Drive;
@@ -18,7 +18,7 @@ import frc.robot.subsystems.Drive;
  * @author Moonshots Software Team
  */
 
-public class DriveToAngle extends Command {
+public class DriveToAngle extends CommandBase {
 
   private double target;
   private int check;
@@ -28,14 +28,14 @@ public class DriveToAngle extends Command {
 
   public DriveToAngle(int requestedRotation) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivymcDriveDriverson);
+    addRequirements(Robot.drivymcDriveDriverson);
     this.requestedRotation = requestedRotation;
 
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     target = drive.gyro.getAngle() + requestedRotation;
     check = 0;
   }
@@ -74,14 +74,14 @@ public class DriveToAngle extends Command {
 
   // Called repeatedly when this Command is scheduled to run.
   @Override
-  protected void execute() {
+  public void execute() {
     // if we triggered a setPoint
     Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     //return true; // disable this command since our gyro broke
     //
     return Robot.drivymcDriveDriverson.leftSide.get() == 0
@@ -91,14 +91,8 @@ public class DriveToAngle extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);    
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
-  }
 }
