@@ -9,10 +9,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -24,7 +22,7 @@ public class DriveCommand extends CommandBase {
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.drivymcDriveDriverson);
+    addRequirements(RobotContainer.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
@@ -79,7 +77,7 @@ public class DriveCommand extends CommandBase {
       valuerighty = 0;
     }
 
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valuerightx, valueleftx, valuelefty);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valuerightx, valueleftx, valuelefty);
     
     ///*
     // trigger assist driving straight 
@@ -119,7 +117,7 @@ public class DriveCommand extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

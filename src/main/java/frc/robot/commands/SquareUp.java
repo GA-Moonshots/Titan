@@ -1,8 +1,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
@@ -10,16 +10,16 @@ import frc.robot.subsystems.Drive;
 
 public class SquareUp extends CommandBase {
 
-  double sensor1 = Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches();
-  double sensor2 = Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches();
+  double sensor1 = RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches();
+  double sensor2 = RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches();
   private double target;
   private int check;
 
-  private Drive drive = Robot.drivymcDriveDriverson;
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
   
   public SquareUp() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.drivymcDriveDriverson);
+    addRequirements(RobotContainer.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
@@ -45,7 +45,7 @@ public class SquareUp extends CommandBase {
 
     // are we there yet? this is to avoid ping-ponging
     // plus we never stop the method unless our output is zero
-    if(Math.abs(error) < RobotMap.ANGLE_TOLERANCE) check++;
+    if(Math.abs(error) < Constants.DriveConstants.ANGLE_TOLERANCE) check++;
     if(check > ENOUGH_CHECKS) return 0.0;
 
     // determine the direction
@@ -65,21 +65,21 @@ public class SquareUp extends CommandBase {
   @Override
   public void execute() {
       //if(java.lang.Double.isInfinite(sensor1) == false && java.lang.Double.isInfinite(sensor2) == false){
-        Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
+        RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
       }
     //}
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    System.out.println("Right sensor reads " + Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches() + " and left sensor reads " + Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches());
-    return Math.abs(Robot.drivymcDriveDriverson.ultrasonic1.getRangeInches() - Robot.drivymcDriveDriverson.ultrasonic2.getRangeInches()) < 1;
+    System.out.println("Right sensor reads " + RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches() + " and left sensor reads " + RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches());
+    return Math.abs(RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches() - RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches()) < 1;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

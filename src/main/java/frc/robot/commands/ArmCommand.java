@@ -5,14 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+/*package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
-/**
- * Responding to motor control. Runs infinitely
- */
+
 public class ArmCommand extends CommandBase {
 
   public ArmCommand() {
@@ -58,3 +56,5 @@ public class ArmCommand extends CommandBase {
   }
 
 }
+
+*/

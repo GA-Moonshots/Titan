@@ -8,8 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 
 /**
@@ -24,11 +24,11 @@ public class DriveToAngle extends CommandBase {
   private int check;
   private int requestedRotation;
 
-  private Drive drive = Robot.drivymcDriveDriverson;
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveToAngle(int requestedRotation) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.drivymcDriveDriverson);
+    addRequirements(RobotContainer.drivymcDriveDriverson);
     this.requestedRotation = requestedRotation;
 
   }
@@ -56,7 +56,7 @@ public class DriveToAngle extends CommandBase {
 
     // are we there yet? this is to avoid ping-ponging
     // plus we never stop the method unless our output is zero
-    if(Math.abs(error) < RobotMap.ANGLE_TOLERANCE) check++;
+    if(Math.abs(error) < Constants.DriveConstants.ANGLE_TOLERANCE) check++;
     if(check > ENOUGH_CHECKS) return 0.0;
 
     // determine the direction
@@ -76,7 +76,7 @@ public class DriveToAngle extends CommandBase {
   @Override
   public void execute() {
     // if we triggered a setPoint
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -84,15 +84,15 @@ public class DriveToAngle extends CommandBase {
   public boolean isFinished() {
     //return true; // disable this command since our gyro broke
     //
-    return Robot.drivymcDriveDriverson.leftSide.get() == 0
-        && Math.abs(drive.gyro.getAngle() - target) < RobotMap.ANGLE_TOLERANCE;
+    return RobotContainer.drivymcDriveDriverson.leftSide.get() == 0
+        && Math.abs(drive.gyro.getAngle() - target) < Constants.DriveConstants.ANGLE_TOLERANCE;
     //
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);    
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);    
   }
 
 }

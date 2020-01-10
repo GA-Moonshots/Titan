@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+/*package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -13,9 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmCommand;
 
-/**
- * The system based around the elevator lift motor
- */
+
 public class Arm extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -39,3 +37,5 @@ public class Arm extends SubsystemBase {
     armEncoder.reset(); // encoder starts at zero. Max is ~900?
   }
 }
+
+*/

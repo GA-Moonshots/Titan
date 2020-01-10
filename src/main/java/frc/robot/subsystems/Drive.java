@@ -10,15 +10,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.RobotMap;
-import frc.robot.commands.DriveCommand;
-//import frc.robot.commands.xDriveCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Ultrasonic.Unit;
-import edu.wpi.first.wpilibj.SendableBase;
-
+import frc.robot.Constants;
 
 /**
  * * Instantiates the drive system with a gyro
@@ -60,10 +55,10 @@ public class Drive extends SubsystemBase {
     
     //gyro.reset();
     // linking motors to ports
-    leftMotor1 = new Jaguar(RobotMap.LEFT1PORT);
-    leftMotor2 = new Jaguar(RobotMap.LEFT2PORT);
-    rightMotor1 = new Jaguar(RobotMap.RIGHT1PORT);
-    rightMotor2 = new Jaguar(RobotMap.RIGHT2PORT);
+    leftMotor1 = new Jaguar(Constants.DriveConstants.LEFT1PORT);
+    leftMotor2 = new Jaguar(Constants.DriveConstants.LEFT2PORT);
+    rightMotor1 = new Jaguar(Constants.DriveConstants.RIGHT1PORT);
+    rightMotor2 = new Jaguar(Constants.DriveConstants.RIGHT2PORT);
     
     // setting up the motor groups
     frontRightMotor = new SpeedControllerGroup(rightMotor1);
@@ -73,10 +68,8 @@ public class Drive extends SubsystemBase {
     rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
     leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
 
-    // making differential drive  
-    //drive = new DifferentialDrive(rightSide, leftSide);
+    // making a mecanum drive
     dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
-    //drive = new DifferentialDrive (leftSide, rightSide);
 
     //int raw = analogSensor.getValue();
     //double volts = analogSensor.getVoltage();
@@ -89,13 +82,5 @@ public class Drive extends SubsystemBase {
 
     
   }
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new DriveCommand()); // THIS IS HOW WE DRIVE THE // ROBOT
-  }
-
 
   }

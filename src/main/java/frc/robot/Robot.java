@@ -8,18 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogInput;
-import frc.robot.commands.DriveToAngle;
-import frc.robot.commands.DriveToWall;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Gripper;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Arm;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,15 +19,10 @@ import frc.robot.subsystems.Arm;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Gripper gripper = new Gripper();
-  public static Arm arm = new Arm();
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
-  public static Drive drivymcDriveDriverson = new Drive();
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-  //AnalogInput analogSensor = new AnalogInput(0);
+  private Command m_autonomousCommand;
 
+
+  private RobotContainer m_robotContainer;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -45,10 +30,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Drive FWD", new DriveToWall());
-    m_chooser.addOption("Rotate 90 Degrees", new DriveToAngle(90));
-    SmartDashboard.putData("Auto mode", m_chooser);
+    m_robotContainer = new RobotContainer();
   }
 
   /**
@@ -61,8 +43,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Distance Wrapper", drivymcDriveDriverson.ultrasonic1.getRangeInches());
-    SmartDashboard.putNumber("Distance Wrapper 2", drivymcDriveDriverson.ultrasonic2.getRangeInches());
+    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+    // commands, running already-scheduled commands, removing finished or interrupted commands,
+    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // block in order for anything in the Command-based framework to work.
+    CommandScheduler.getInstance().run();
 
   }
  
@@ -77,7 +62,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   /**
@@ -93,7 +77,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -104,7 +88,7 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+      m_autonomousCommand.schedule();
     }
   }
 
@@ -113,7 +97,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   @Override
@@ -133,7 +116,7 @@ public class Robot extends TimedRobot {
   @Override
   
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
 
     /*double averageVolts = (analogSensor.getAverageVoltage()/.0048828125) * 5;
     System.out.println(averageVolts);*/
