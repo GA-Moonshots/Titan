@@ -9,7 +9,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
 import frc.robot.RobotContainer;
 /**
  * Responding to motor control. Runs infinitely
@@ -34,7 +33,7 @@ public class DriveCommand extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    switch(OI.xbox.getPOV()){
+    switch(RobotContainer.m_driverController.getPOV()){
       case -1:   break;
       // SAVED POSITION HIGH   
       //dpad up 
@@ -59,10 +58,10 @@ public class DriveCommand extends CommandBase {
     //MANUAL DEAD ZONE
     double dead = 0.15;
 
-    double valueleftx = OI.xbox.getRawAxis(0);
-    double valuelefty = OI.xbox.getRawAxis(1);
-    double valuerightx = OI.xbox.getRawAxis(4);
-    double valuerighty = OI.xbox.getRawAxis(5);
+    double valueleftx = RobotContainer.m_driverController.getRawAxis(0);
+    double valuelefty = RobotContainer.m_driverController.getRawAxis(1);
+    double valuerightx = RobotContainer.m_driverController.getRawAxis(4);
+    double valuerighty =RobotContainer.m_driverController.getRawAxis(5);
 
     if(Math.abs(valueleftx) < dead){
       valueleftx = 0;

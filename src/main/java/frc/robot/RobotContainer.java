@@ -15,6 +15,7 @@ import frc.robot.commands.DriveTimeReverse;
 import frc.robot.commands.DriveToAngle;
 import frc.robot.commands.DriveToWall;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.SquareUp;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -39,7 +40,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Drive drivymcDriveDriverson = new Drive();
 
-  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  public static XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
 
 
@@ -63,9 +64,14 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    // X button
     new JoystickButton(m_driverController, Button.kX.value)
-    .whenPressed(new ExampleCommand(m_exampleSubsystem));
-  
+    .whenPressed(new DriveToWall());
+    
+    // B button
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());
   }
 
 

@@ -1,19 +1,16 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class DumpClose extends CommandGroupBase {
+public class DumpClose extends SequentialCommandGroup {
 
     public DumpClose() {
-        addSequential(new DriveTimeLeft(1));
-        addSequential(new DriveTimeRight(1));
+        addCommands(
+            new DriveTimeLeft(1),
+            new DriveTimeRight(1)
+        );
 
     }
 
-    @Override
-    public void addCommands(Command... commands) {
-        // TODO Auto-generated method stub
 
-    }
 }

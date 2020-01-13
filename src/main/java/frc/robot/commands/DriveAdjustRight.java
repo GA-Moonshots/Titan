@@ -1,11 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class DriveAdjustRight extends CommandGroupBase {
+public class DriveAdjustRight extends SequentialCommandGroup {
     public  DriveAdjustRight() {
-    	addSequential(new DriveToAngle(-30));
-        addSequential(new DriveTimeReverse(1.5));
-        addSequential(new DriveToAngle(30));
+        addCommands(
+            new DriveToAngle(-30),
+            new DriveTimeReverse(1.5),
+            new DriveToAngle(30)
+        );
     }
 }
