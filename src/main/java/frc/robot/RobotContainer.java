@@ -14,6 +14,10 @@ import frc.robot.commands.DriveTimeForward;
 import frc.robot.commands.DriveTimeReverse;
 import frc.robot.commands.DriveToAngle;
 import frc.robot.commands.DriveToWall;
+import frc.robot.commands.DumpClose;
+import frc.robot.commands.DumpFar;
+import frc.robot.commands.DumpMid;
+//import frc.robot.commands.DumpNear;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SquareUp;
 import frc.robot.subsystems.Drive;
@@ -53,6 +57,9 @@ public class RobotContainer {
     configureButtonBindings();
     m_chooser.setDefaultOption("Drive FWD", new DriveTimeReverse(5));
     m_chooser.addOption("Rotate 90 Degrees", new DriveToAngle(90));
+    m_chooser.addOption("Dump them cells when close", new DumpClose());
+    m_chooser.addOption("Dump them cells when far", new DumpFar());
+    m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
     SmartDashboard.putData("Auto mode", m_chooser);
 
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
@@ -72,6 +79,46 @@ public class RobotContainer {
     // B button
     new JoystickButton(m_driverController, Button.kB.value)
     .whenPressed(new SquareUp());
+
+    // A button
+    new JoystickButton(m_driverController, Button.kA.value)
+    .whenPressed(new DriveToAngle(90));
+
+    // Y button
+    new JoystickButton(m_driverController, Button.kY.value)
+    .whenPressed(new SquareUp());
+
+    // Right bumper
+    new JoystickButton(m_driverController, Button.kBumperRight.value)
+    .whenPressed(new SquareUp()); 
+
+    // Left bumper
+    new JoystickButton(m_driverController, Button.kBumperLeft.value)
+    .whenPressed(new SquareUp());
+
+    // Right Trigger
+    /*new JoystickButton(m_driverController, Button.kA.value)
+    .whenPressed(new SquareUp());
+
+    // Left Trigger
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());
+
+    // D-Pad up
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());
+
+    // D-Pad down
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());
+
+    // D-Pad Right
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());
+
+    // D-Pad Left
+    new JoystickButton(m_driverController, Button.kB.value)
+    .whenPressed(new SquareUp());*/
   }
 
 

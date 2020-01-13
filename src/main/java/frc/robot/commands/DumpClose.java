@@ -6,8 +6,10 @@ public class DumpClose extends SequentialCommandGroup {
 
     public DumpClose() {
         addCommands(
-            new DriveTimeLeft(1),
-            new DriveTimeRight(1)
+            //Drive to the wall
+            new DriveToWall()
+            //Dump cells
+            
         );
 
     }

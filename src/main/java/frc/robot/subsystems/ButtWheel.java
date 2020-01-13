@@ -5,37 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-/*package frc.robot.subsystems;
+package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.commands.ArmCommand;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.util.Color;
+import com.revrobotics.ColorSensorV3;
 
-
-public class Arm extends SubsystemBase {
+public class ButtWheel extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   // here's a motor i'm declaring here, sorry Mr. A it's not in a command
-  public Jaguar armMotor = new Jaguar(RobotMap.ARMPORT);
-  // for the love of God start the elevator down
-  public Encoder armEncoder = new Encoder(RobotMap.ARM_ENC_A, RobotMap.ARM_ENC_B, false, Encoder.EncodingType.k4X);
   
   //track the desired position of the arm
   // public int holdAt;
-
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    setDefaultCommand(new ArmCommand());
-  }
-
-
-  public Arm(){
-    armEncoder.reset(); // encoder starts at zero. Max is ~900?
+  public ButtWheel(){
+    //armEncoder.reset(); // encoder starts at zero. Max is ~900?
   }
 }
-
-*/

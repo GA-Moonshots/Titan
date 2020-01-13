@@ -2,17 +2,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class DumpFar extends SequentialCommandGroup {
+public class DumpMid extends SequentialCommandGroup {
 
-    public DumpFar() {
+    public DumpMid() {
         addCommands(
-            //Go forward
+            //Drive to wall
             new DriveToWall(),
-            //Go right
-            new DriveTimeRight(2)
+            //Drive right
+            new DriveTimeRight(1)
             //Dump cells
         );
 
     }
-
 }
