@@ -9,6 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.util.Color;
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.I2C;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveTimeForward;
 import frc.robot.commands.DriveTimeReverse;
@@ -20,6 +23,7 @@ import frc.robot.commands.DumpMid;
 //import frc.robot.commands.DumpNear;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SquareUp;
+import frc.robot.subsystems.ButtWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -43,10 +47,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Drive drivymcDriveDriverson = new Drive();
+  public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
+
 
   public static XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
-
 
 
   /**
@@ -61,6 +66,9 @@ public class RobotContainer {
     m_chooser.addOption("Dump them cells when far", new DumpFar());
     m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
     SmartDashboard.putData("Auto mode", m_chooser);
+    
+
+    
 
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
   }

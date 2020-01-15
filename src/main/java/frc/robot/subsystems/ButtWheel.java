@@ -16,9 +16,15 @@ public class ButtWheel extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   // here's a motor i'm declaring here, sorry Mr. A it's not in a command
-  
+  public final I2C.Port i2cPort = I2C.Port.kOnboard;
   //track the desired position of the arm
   // public int holdAt;
+  public ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+
+  /**
+   * Open Smart Dashboard or Shuffleboard to see the color detected by the 
+   * sensor.
+   */
   public ButtWheel(){
     //armEncoder.reset(); // encoder starts at zero. Max is ~900?
   }
