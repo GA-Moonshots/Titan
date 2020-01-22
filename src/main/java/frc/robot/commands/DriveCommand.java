@@ -8,6 +8,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 /**
@@ -76,7 +77,13 @@ public class DriveCommand extends CommandBase {
       valuerighty = 0;
     }
 
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valuerightx, valueleftx, valuelefty);
+    
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.setRightSideInverted(false);
+    //RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valueleftx, valuerightx, valuelefty);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
+    
+    
+    
     
     ///*
     // trigger assist driving straight 

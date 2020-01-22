@@ -24,17 +24,18 @@ public final class Constants {
     public static int bBUTTON_NUM = 2;
     public static int yBUTTON_NUM = 4;
     public static int LEFTSTICKCLICK_NUM = 9;
-    public static final int kDriverControllerPort = 1;
+    public static final int kDriverControllerPort = 0;
 
   }
 
   public static final class DriveConstants {
 
     // MOTORS
-    public static int LEFT1PORT = 0;
-    public static int LEFT2PORT = 1;
-    public static int RIGHT1PORT = 3;
-    public static int RIGHT2PORT = 2;
+    public static int FRONT_RIGHT = 9;
+    public static int BACK_RIGHT = 8;
+    public static int FRONT_LEFT = 4;
+    public static int BACK_LEFT = 3;
+    public static int DUMPER = 0;
 
     public static double ANGLE_TOLERANCE = 2.0;
   
@@ -43,14 +44,14 @@ public final class Constants {
   public static final class DIOConstants {
 
     // DIO
-    public static int GRABBER_ENC_A = 1;
-    public static int GRABBER_ENC_B = 0;
-    public static int ARM_ENC_A = 6;
-    public static int ARM_ENC_B = 7;
-    public static int ELEVATOR_ENC_A = 2;
-    public static int ELEVATOR_ENC_B = 3; 
-    public static int DIO_LIMITUP = 4;
-    public static int DIO_LIMITDOWN = 5;
+    // public static int GRABBER_ENC_A = 1;
+    // public static int GRABBER_ENC_B = 0;
+    // public static int ARM_ENC_A = 6;
+    // public static int ARM_ENC_B = 7;
+    // public static int ELEVATOR_ENC_A = 2;
+    // public static int ELEVATOR_ENC_B = 3; 
+    // public static int DIO_LIMITUP = 4;
+    // public static int DIO_LIMITDOWN = 5;
 
   }
 

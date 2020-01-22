@@ -55,29 +55,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    double blue = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor().blue;
-    double red = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor().red;
-    double green = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor().green;
-    String colorInfo;
-    if (blue<0.15 && red>0.3 && green>0.5){
-      colorInfo = "Y";
-    }
-    else if (blue>red && blue>0.3 && green<0.5){
-      colorInfo = "B";
-    }
-    else if (red>blue && red>0.3 && green<0.5){
-      colorInfo = "R";
-    }
-    else if (green>blue && green>red){
-      colorInfo = "G";
-    }
-    else {
-      colorInfo = "?";
-    }
-    SmartDashboard.putString("Raw Color Reading", colorInfo);
-    SmartDashboard.putNumber("red", red);
-    SmartDashboard.putNumber("green", green);
-    SmartDashboard.putNumber("blue", blue);
 
 
   }

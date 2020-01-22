@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
 
 /**
@@ -17,17 +18,16 @@ import frc.robot.Constants;
 public class BallDumper extends SubsystemBase {
 
   // here's some motors
-  public Jaguar leftMotor1;
-  public Jaguar leftMotor2;
-  public Jaguar rightMotor1;
-  public Jaguar rightMotor2;
+  public Jaguar dumperMoter;
+
+  public SpeedControllerGroup dumper;
+
 
   public BallDumper(){    
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
     // linking motors to ports
-    leftMotor1 = new Jaguar(Constants.DriveConstants.LEFT1PORT);
-    leftMotor2 = new Jaguar(Constants.DriveConstants.LEFT2PORT);
-    rightMotor1 = new Jaguar(Constants.DriveConstants.RIGHT1PORT);
-    rightMotor2 = new Jaguar(Constants.DriveConstants.RIGHT2PORT);
-  }
+    dumperMoter = new Jaguar(Constants.DriveConstants.DUMPER);
+    dumper = new SpeedControllerGroup(dumperMoter);
+
+    }
   }

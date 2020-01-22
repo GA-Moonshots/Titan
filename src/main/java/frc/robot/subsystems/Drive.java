@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import frc.robot.Constants;
 
+
 /**
  * * Instantiates the drive system with a gyro
  */
@@ -29,20 +30,20 @@ public class Drive extends SubsystemBase {
   
 
   // here's some motors
-  public Jaguar leftMotor1;
-  public Jaguar leftMotor2;
-  public Jaguar rightMotor1;
-  public Jaguar rightMotor2;
+  public Jaguar frontLeftMotor;
+  public Jaguar backLeftMotor;
+  public Jaguar frontRightMotor;
+  public Jaguar backRightMotor;
 
   // drive system
   //public DifferentialDrive drive;
   public MecanumDrive dMecanumDrive;
 
   // grouping the motors
-  public SpeedControllerGroup frontRightMotor;
-  public SpeedControllerGroup frontLeftMotor;
-  public SpeedControllerGroup backRightMotor;
-  public SpeedControllerGroup backLeftMotor;
+  public SpeedControllerGroup frontRight;
+  public SpeedControllerGroup frontLeft;
+  public SpeedControllerGroup backRight;
+  public SpeedControllerGroup backLeft;
   public SpeedControllerGroup rightSide;
   public SpeedControllerGroup leftSide;
 
@@ -55,22 +56,24 @@ public class Drive extends SubsystemBase {
     
     //gyro.reset();
     // linking motors to ports
-    leftMotor1 = new Jaguar(Constants.DriveConstants.LEFT1PORT);
-    leftMotor2 = new Jaguar(Constants.DriveConstants.LEFT2PORT);
-    rightMotor1 = new Jaguar(Constants.DriveConstants.RIGHT1PORT);
-    rightMotor2 = new Jaguar(Constants.DriveConstants.RIGHT2PORT);
+    frontLeftMotor = new Jaguar(Constants.DriveConstants.FRONT_LEFT);
+    backLeftMotor = new Jaguar(Constants.DriveConstants.BACK_LEFT);
+    frontRightMotor = new Jaguar(Constants.DriveConstants.FRONT_RIGHT);
+    backRightMotor = new Jaguar(Constants.DriveConstants.BACK_RIGHT);
     
     // setting up the motor groups
-    frontRightMotor = new SpeedControllerGroup(rightMotor1);
-    frontLeftMotor = new SpeedControllerGroup(leftMotor1);
-    backRightMotor = new SpeedControllerGroup(rightMotor2);
-    backLeftMotor = new SpeedControllerGroup(leftMotor2);
-    rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
-    leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
+    frontRight = new SpeedControllerGroup(frontRightMotor);
+    frontRight.setInverted(true);
+    frontLeft = new SpeedControllerGroup(frontLeftMotor);
+    frontLeft.setInverted(true);
+    backRight = new SpeedControllerGroup(backRightMotor);
+    backLeft = new SpeedControllerGroup(backLeftMotor);
+    //rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
+    //leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
 
     // making a mecanum drive
-    dMecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
-
+    dMecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+ 
     //int raw = analogSensor.getValue();
     //double volts = analogSensor.getVoltage();
     //int averageRaw = analogSensor.getAverageValue();

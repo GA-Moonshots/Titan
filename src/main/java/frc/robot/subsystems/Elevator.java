@@ -24,10 +24,6 @@ public class Elevator extends SubsystemBase {
   public Elevator(){    
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
     
-    // linking motors to ports
-    leftMotor1 = new Jaguar(Constants.DriveConstants.LEFT1PORT);
-    leftMotor2 = new Jaguar(Constants.DriveConstants.LEFT2PORT);
-    rightMotor1 = new Jaguar(Constants.DriveConstants.RIGHT1PORT);
-    rightMotor2 = new Jaguar(Constants.DriveConstants.RIGHT2PORT); 
-  }
+    // linking motors to ports 
+    }
   }

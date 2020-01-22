@@ -23,6 +23,7 @@ import frc.robot.commands.DumpMid;
 //import frc.robot.commands.DumpNear;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SquareUp;
+import frc.robot.subsystems.BallDumper;
 import frc.robot.subsystems.ButtWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -48,6 +49,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Drive drivymcDriveDriverson = new Drive();
   public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
+  public static BallDumper dumpymcDumpDumperson = new BallDumper();
 
 
   public static XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -94,7 +96,7 @@ public class RobotContainer {
 
     // Y button
     new JoystickButton(m_driverController, Button.kY.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DumpClose());
 
     // Right bumper
     new JoystickButton(m_driverController, Button.kBumperRight.value)
@@ -104,16 +106,16 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kBumperLeft.value)
     .whenPressed(new SquareUp());
 
-    // Right Trigger
-    /*new JoystickButton(m_driverController, Button.kA.value)
+    // Left Stick
+    new JoystickButton(m_driverController, Button.kStickLeft.value)
     .whenPressed(new SquareUp());
 
-    // Left Trigger
-    new JoystickButton(m_driverController, Button.kB.value)
+    // Right Stick
+    new JoystickButton(m_driverController, Button.kStickRight.value)
     .whenPressed(new SquareUp());
 
     // D-Pad up
-    new JoystickButton(m_driverController, Button.kB.value)
+    new JoystickButton(m_driverController, Button.kA.value)
     .whenPressed(new SquareUp());
 
     // D-Pad down
@@ -126,7 +128,7 @@ public class RobotContainer {
 
     // D-Pad Left
     new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new SquareUp());*/
+    .whenPressed(new SquareUp());
   }
 
 
