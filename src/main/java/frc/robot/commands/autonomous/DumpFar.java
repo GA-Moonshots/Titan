@@ -1,6 +1,8 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveTimeRight;
+import frc.robot.commands.DriveToWall;
 
 public class DumpFar extends SequentialCommandGroup {
 

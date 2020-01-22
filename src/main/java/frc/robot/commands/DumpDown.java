@@ -13,15 +13,14 @@ import frc.robot.RobotContainer;
  * Responding to motor control. Runs infinitely
  */
 
-public class DumpOpen extends CommandBase {
+public class DumpDown extends CommandBase {
 
   private int count = 0;
   private double time;
 
-  public DumpOpen(double time) {
+  public DumpDown() {
     // Use requires() here to declare subsystem dependencies
     addRequirements(RobotContainer.dumpymcDumpDumperson);
-    this.time = time;
   }
 
   // Called just before this Command runs the first time
@@ -34,19 +33,20 @@ public class DumpOpen extends CommandBase {
   @Override
   public void execute() {
       count ++;
+      RobotContainer.dumpymcDumpDumperson.motor.set(-0.5);
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return count >= time*30;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    RobotContainer.dumpymcDumpDumperson.motor.set(0);
   }
 
 }

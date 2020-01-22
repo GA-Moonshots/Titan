@@ -8,7 +8,7 @@ import frc.robot.subsystems.Drive;
  * Responding to motor control. Runs infinitely
  */
 
-public class SquareUp extends CommandBase {
+public class DriveSquareUp extends CommandBase {
 
   double sensor1 = RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches();
   double sensor2 = RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches();
@@ -17,7 +17,7 @@ public class SquareUp extends CommandBase {
 
   private Drive drive = RobotContainer.drivymcDriveDriverson;
   
-  public SquareUp() {
+  public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
     addRequirements(RobotContainer.drivymcDriveDriverson);
   }

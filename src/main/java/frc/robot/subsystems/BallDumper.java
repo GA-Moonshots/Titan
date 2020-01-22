@@ -8,7 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
 
@@ -18,16 +20,17 @@ import frc.robot.Constants;
 public class BallDumper extends SubsystemBase {
 
   // here's some motors
-  public Jaguar dumperMoter;
-
-  public SpeedControllerGroup dumper;
-
+  private Jaguar dumperMotor = new Jaguar(Constants.DriveConstants.DUMPER);
+  public SpeedControllerGroup motor = new SpeedControllerGroup(dumperMotor);
+  // Initializes an AnalogPotentiometer on analog port 0
+  // The full range of motion (in meaningful external units) is 0-180 (this could be degrees, for instance)
+  // The "starting point" of the motion, i.e. where the mechanism is located when the potentiometer reads 0v, is 30.
+  public AnalogPotentiometer turnySensorThing = new AnalogPotentiometer(0, 180, 30);
 
   public BallDumper(){    
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
     // linking motors to ports
-    dumperMoter = new Jaguar(Constants.DriveConstants.DUMPER);
-    dumper = new SpeedControllerGroup(dumperMoter);
+     
 
     }
   }

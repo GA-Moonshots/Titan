@@ -12,17 +12,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.DriveTimeForward;
-import frc.robot.commands.DriveTimeReverse;
-import frc.robot.commands.DriveToAngle;
 import frc.robot.commands.DriveToWall;
-import frc.robot.commands.DumpClose;
-import frc.robot.commands.DumpFar;
-import frc.robot.commands.DumpMid;
+import frc.robot.commands.autonomous.*;
+import frc.robot.commands.DumpLift;
 //import frc.robot.commands.DumpNear;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.SquareUp;
+import frc.robot.commands.*;
 import frc.robot.subsystems.BallDumper;
 import frc.robot.subsystems.ButtWheel;
 import frc.robot.subsystems.Drive;
@@ -46,7 +40,6 @@ import static edu.wpi.first.wpilibj.XboxController.Button;
 */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Drive drivymcDriveDriverson = new Drive();
   public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
   public static BallDumper dumpymcDumpDumperson = new BallDumper();
@@ -84,11 +77,11 @@ public class RobotContainer {
 
     // X button
     new JoystickButton(m_driverController, Button.kX.value)
-    .whenPressed(new DriveToWall());
+    .whileHeld(new DumpDown());
     
     // B button
     new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // A button
     new JoystickButton(m_driverController, Button.kA.value)
@@ -96,39 +89,39 @@ public class RobotContainer {
 
     // Y button
     new JoystickButton(m_driverController, Button.kY.value)
-    .whenPressed(new DumpClose());
+    .whileHeld(new DumpLift());
 
     // Right bumper
     new JoystickButton(m_driverController, Button.kBumperRight.value)
-    .whenPressed(new SquareUp()); 
+    .whenPressed(new DriveSquareUp()); 
 
     // Left bumper
     new JoystickButton(m_driverController, Button.kBumperLeft.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // Left Stick
     new JoystickButton(m_driverController, Button.kStickLeft.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // Right Stick
     new JoystickButton(m_driverController, Button.kStickRight.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // D-Pad up
     new JoystickButton(m_driverController, Button.kA.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // D-Pad down
     new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // D-Pad Right
     new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
 
     // D-Pad Left
     new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new SquareUp());
+    .whenPressed(new DriveSquareUp());
   }
 
 

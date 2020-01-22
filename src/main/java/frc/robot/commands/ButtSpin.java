@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class SpinCommand extends CommandBase {
+public class ButtSpin extends CommandBase {
   private boolean spinToColor;
 
-  public SpinCommand(boolean spinToColor) {
+  public ButtSpin(boolean spinToColor) {
     // Use requires() here to declare subsystem dependencies
     addRequirements(RobotContainer.spinnymcSpinSpinnerson);
     this.spinToColor = spinToColor;
