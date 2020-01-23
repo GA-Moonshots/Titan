@@ -40,7 +40,10 @@ public class DumpDown extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return false;
+      return false;
+    //return RobotContainer.dumpymcDumpDumperson.turnySensorThing.getValue() < 3909;
+    //Low value 3909
+    //High value 3952
   }
 
   // Called once after isFinished returns true

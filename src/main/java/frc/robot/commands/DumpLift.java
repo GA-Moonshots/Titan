@@ -41,6 +41,9 @@ public class DumpLift extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+    //return RobotContainer.dumpymcDumpDumperson.turnySensorThing.getValue() > 3951;
+    //Low value 3909
+    //High value 3952
   }
 
   // Called once after isFinished returns true
