@@ -53,7 +53,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putNumber("turnyValue", RobotContainer.dumpymcDumpDumperson.turnySensorThing.getValue());
+    SmartDashboard.putNumber("turnyValue", RobotContainer.dumpymcDumpDumperson.turnySensorThing.get());
+    SmartDashboard.putNumber("gyroValue", RobotContainer.drivymcDriveDriverson.gyro.getAngle());
   }
  
   /**

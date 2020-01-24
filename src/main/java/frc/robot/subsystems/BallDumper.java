@@ -27,7 +27,7 @@ public class BallDumper extends SubsystemBase {
   // Initializes an AnalogPotentiometer on analog port 0
   // The full range of motion (in meaningful external units) is 0-180 (this could be degrees, for instance)
   // The "starting point" of the motion, i.e. where the mechanism is located when the potentiometer reads 0v, is 30.
-  public AnalogInput turnySensorThing = new AnalogInput(0);
+  public AnalogPotentiometer turnySensorThing = new AnalogPotentiometer(0);
   //public Servo servo1 = new Servo(0);
 
   public BallDumper(){    

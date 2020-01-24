@@ -33,15 +33,14 @@ public class DumpLift extends CommandBase {
   @Override
   public void execute() {
       count ++;
-      RobotContainer.dumpymcDumpDumperson.motor.set(0.5);
+      RobotContainer.dumpymcDumpDumperson.motor.set(0.7);
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return false;
-    //return RobotContainer.dumpymcDumpDumperson.turnySensorThing.getValue() > 3951;
+    return RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() > 0.996;
     //Low value 3909
     //High value 3952
   }

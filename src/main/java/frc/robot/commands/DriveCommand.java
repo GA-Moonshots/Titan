@@ -78,9 +78,8 @@ public class DriveCommand extends CommandBase {
     }
 
     
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.setRightSideInverted(false);
-    //RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(valueleftx, valuerightx, valuelefty);
     RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
+    //RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx, RobotContainer.drivymcDriveDriverson.gyro.getAngle());
     
     
     

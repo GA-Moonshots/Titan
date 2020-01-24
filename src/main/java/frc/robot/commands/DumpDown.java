@@ -32,16 +32,15 @@ public class DumpDown extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-      count ++;
-      RobotContainer.dumpymcDumpDumperson.motor.set(-0.5);
+    if (RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() > 0.995)
+      RobotContainer.dumpymcDumpDumperson.motor.set(-0.3);
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-      return false;
-    //return RobotContainer.dumpymcDumpDumperson.turnySensorThing.getValue() < 3909;
+    return RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() < 0.995;
     //Low value 3909
     //High value 3952
   }

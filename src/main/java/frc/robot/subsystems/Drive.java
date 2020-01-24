@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import frc.robot.Constants;
 
@@ -22,7 +21,7 @@ import frc.robot.Constants;
 public class Drive extends SubsystemBase {
   
   // here's a gyro
-  public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  public GyroWrapper gyro = new GyroWrapper();
   public UltrasonicWrapper ultrasonic1 = new UltrasonicWrapper(0, 1, Unit.kInches);
   public UltrasonicWrapper ultrasonic2 = new UltrasonicWrapper(2, 3, Unit.kInches);
   //public Ultrasonic ultrasonic = new Ultrasonic(0, 1);
@@ -53,8 +52,7 @@ public class Drive extends SubsystemBase {
 
   public Drive(){    
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
-    
-    //gyro.reset();
+    gyro.reset();
     // linking motors to ports
     frontLeftMotor = new Jaguar(Constants.DriveConstants.FRONT_LEFT);
     backLeftMotor = new Jaguar(Constants.DriveConstants.BACK_LEFT);
@@ -73,6 +71,8 @@ public class Drive extends SubsystemBase {
 
     // making a mecanum drive
     dMecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    dMecanumDrive.setRightSideInverted(false);
+
  
     //int raw = analogSensor.getValue();
     //double volts = analogSensor.getVoltage();
