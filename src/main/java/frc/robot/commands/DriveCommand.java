@@ -9,6 +9,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 /**
@@ -16,9 +17,9 @@ import frc.robot.RobotContainer;
  */
 public class DriveCommand extends CommandBase {
 
-  //private boolean notMoving = true;
-  //private boolean driveStraight = false;
- // private double driveStraightAt;
+    private boolean notMoving = true;
+    private boolean driveStraight = false;
+    private double driveStraightAt;
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -28,17 +29,19 @@ public class DriveCommand extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    //Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    driveStraight = !driveStraight;    
+    this.driveStraightAt = RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    switch(RobotContainer.m_driverController.getPOV()){
+    switch(RobotContainer.XboxController.getPOV()){
       case -1:   break;
       // SAVED POSITION HIGH   
       //dpad up 
-      case 0:                   
+      case 0:      
+                      
                 break;
       case 45:  break;
       //dpad right
@@ -59,10 +62,10 @@ public class DriveCommand extends CommandBase {
     //MANUAL DEAD ZONE
     double dead = 0.15;
 
-    double valueleftx = RobotContainer.m_driverController.getRawAxis(0);
-    double valuelefty = RobotContainer.m_driverController.getRawAxis(1);
-    double valuerightx = RobotContainer.m_driverController.getRawAxis(4);
-    double valuerighty =RobotContainer.m_driverController.getRawAxis(5);
+    double valueleftx = RobotContainer.XboxController.getRawAxis(0);
+    double valuelefty = RobotContainer.XboxController.getRawAxis(1);
+    double valuerightx = RobotContainer.XboxController.getRawAxis(4);
+    double valuerighty =RobotContainer.XboxController.getRawAxis(5);
 
     if(Math.abs(valueleftx) < dead){
       valueleftx = 0;
@@ -75,39 +78,34 @@ public class DriveCommand extends CommandBase {
     }
     if(Math.abs(valuerighty) < dead){
       valuerighty = 0;
-    }
+    }    
+    
+    
+    
+    
+    // // trigger assist driving straight 
+    // if(valuelefty < 0 && valueleftx == 0 && notMoving){
+    //   notMoving = false;
+    //   driveStraight = true;
+    //   this.driveStraightAt = RobotContainer.drivymcDriveDriverson.gyro.getAngle();
+    // }
+    // else if(valueleftx != 0){
+    //   notMoving = false;
+    //   driveStraight = false;
+    // }
+    // else if(valueleftx == 0 && valuelefty == 0){
+    //   notMoving = true;
+    //   driveStraight = false;
+    // }
 
-    
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
-    //RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx, RobotContainer.drivymcDriveDriverson.gyro.getAngle());
-    
-    
-    
-    
-    ///*
-    // trigger assist driving straight 
-    /*if(valuelefty < 0 && valueleftx == 0 && notMoving){
-      notMoving = false;
-      driveStraight = true;
-      this.driveStraightAt = Robot.drivymcDriveDriverson.gyro.getAngle();
-    }
-    else if(valueleftx != 0){
-      notMoving = false;
-      driveStraight = false;
-    }
-    else if(valueleftx == 0 && valuelefty == 0){
-      notMoving = true;
-      driveStraight = false;
-    }
-
-    if(driveStraight){
-      double difference = driveStraightAt - Robot.drivymcDriveDriverson.gyro.getAngle(); 
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valuelefty, -(difference * .03), 0); 
+    if(true == false && Math.abs(valueleftx) > 0){
+      double difference = driveStraightAt - RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
+      double power = -0.80;
+      if(valueleftx > 0) power = 0.80;
+      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
     } else {
-      Robot.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valuelefty, -valueleftx*0.5, 0); 
+      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
     }
-    */
-    //*/
 
 
 

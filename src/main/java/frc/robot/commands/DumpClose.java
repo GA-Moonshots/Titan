@@ -14,9 +14,9 @@ import frc.robot.subsystems.BallDumper;
  * Responding to motor control. Runs infinitely
  */
 
-public class DumpOpen extends CommandBase {
+public class DumpClose extends CommandBase {
 
-  public DumpOpen() {
+  public DumpClose() {
     // Use requires() here to declare subsystem dependencies
     addRequirements(RobotContainer.dumpymcDumpDumperson);
   }
@@ -29,14 +29,15 @@ public class DumpOpen extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-      RobotContainer.dumpymcDumpDumperson.servo1.setAngle(90);
+      RobotContainer.dumpymcDumpDumperson.servo1.setAngle(5);
+      
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.dumpymcDumpDumperson.servo1.getAngle() <= 90;
+    return RobotContainer.dumpymcDumpDumperson.servo1.getAngle() <= 5;
   }
 
   // Called once after isFinished returns true

@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-import frc.robot.commands.DriveToWall;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.autonomous.*;
-import frc.robot.commands.DumpLift;
 //import frc.robot.commands.DumpNear;
 import frc.robot.commands.*;
 import frc.robot.subsystems.BallDumper;
 import frc.robot.subsystems.ButtWheel;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 /**
@@ -43,9 +44,12 @@ public class RobotContainer {
   public static Drive drivymcDriveDriverson = new Drive();
   public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
   public static BallDumper dumpymcDumpDumperson = new BallDumper();
+  public static Climb climbymcClimbClimberson = new Climb();
 
 
-  public static XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  public static XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
+  public static Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
+
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
 
 
@@ -57,7 +61,7 @@ public class RobotContainer {
     configureButtonBindings();
     m_chooser.setDefaultOption("Drive FWD", new DriveTimeReverse(5));
     m_chooser.addOption("Rotate 90 Degrees", new DriveToAngle(90));
-    m_chooser.addOption("Dump them cells when close", new DumpClose());
+    m_chooser.addOption("Dump them cells when near", new DumpNear());
     m_chooser.addOption("Dump them cells when far", new DumpFar());
     m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -75,53 +79,49 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////*** XBOX BINDINGS ***///////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+
     // X button
-    new JoystickButton(m_driverController, Button.kX.value)
+    new JoystickButton(XboxController, Button.kX.value)
     .whileHeld(new DumpDown());
     
     // B button
-    new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new DriveSquareUp());
+    new JoystickButton(XboxController, Button.kB.value)
+    .whileHeld(new ClimbUp());
 
     // A button
-    new JoystickButton(m_driverController, Button.kA.value)
-    .whenPressed(new DriveToAngle(90));
+    new JoystickButton(XboxController, Button.kA.value)
+    .whenPressed(new DriveToAngle(180));
 
     // Y button
-    new JoystickButton(m_driverController, Button.kY.value)
+    new JoystickButton(XboxController, Button.kY.value)
     .whileHeld(new DumpLift());
 
     // Right bumper
-    new JoystickButton(m_driverController, Button.kBumperRight.value)
-    .whenPressed(new DriveSquareUp()); 
+    new JoystickButton(XboxController, Button.kBumperRight.value)
+    .whenPressed(new DumpClose()); 
 
     // Left bumper
-    new JoystickButton(m_driverController, Button.kBumperLeft.value)
-    .whenPressed(new DriveSquareUp());
+    new JoystickButton(XboxController, Button.kBumperLeft.value)
+    .whenPressed(new DumpOpen());
 
     // Left Stick
-    new JoystickButton(m_driverController, Button.kStickLeft.value)
+    new JoystickButton(XboxController, Button.kStickLeft.value)
     .whenPressed(new DriveSquareUp());
 
     // Right Stick
-    new JoystickButton(m_driverController, Button.kStickRight.value)
+    new JoystickButton(XboxController, Button.kStickRight.value)
     .whenPressed(new DriveSquareUp());
 
-    // D-Pad up
-    new JoystickButton(m_driverController, Button.kA.value)
-    .whenPressed(new DriveSquareUp());
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////*** JOYSTICK BINDINGS ***/////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
 
-    // D-Pad down
-    new JoystickButton(m_driverController, Button.kB.value)
+    new JoystickButton(JoystickController, 1)
     .whenPressed(new DriveSquareUp());
-
-    // D-Pad Right
-    new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new DriveSquareUp());
-
-    // D-Pad Left
-    new JoystickButton(m_driverController, Button.kB.value)
-    .whenPressed(new DriveSquareUp());
+    
   }
 
 

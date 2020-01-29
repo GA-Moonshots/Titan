@@ -3,9 +3,9 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveToWall;
 
-public class DumpClose extends SequentialCommandGroup {
+public class DumpNear extends SequentialCommandGroup {
 
-    public DumpClose() {
+    public DumpNear() {
         addCommands(
             //Drive to the wall
             new DriveToWall()

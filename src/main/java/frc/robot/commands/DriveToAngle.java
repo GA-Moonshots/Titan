@@ -7,13 +7,14 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 
 /**
- * Drive to an angle comand
+ * Drive to an angle command
  * 
  * @author Moonshots Software Team
  */
@@ -23,6 +24,7 @@ public class DriveToAngle extends CommandBase {
   private double target;
   private int check;
   private int requestedRotation;
+  private int ENOUGH_CHECKS = 15;
 
   private Drive drive = RobotContainer.drivymcDriveDriverson;
 
@@ -36,18 +38,18 @@ public class DriveToAngle extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    target = drive.gyro.getAngle() + requestedRotation;
+    target = drive.gyro.getRawAngle() + requestedRotation;
     check = 0;
   }
 
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
-    double MAX_POWER = 0.7; // cap the power 
-    double MIN_POWER = 0.45; // lowest effective power
-    int ENOUGH_CHECKS = 15; // how many times do we pass our target until we're satisfied?
+    double MAX_POWER = 0.55; // cap the power 
+    double MIN_POWER = 0.15; // lowest effective power
 
     // determine the error
-    double error = target - drive.gyro.getAngle();
+    double error = target - drive.gyro.getRawAngle();
+    //double error = drive.gyro.getRawAngle() - target;
 
     // determine the power output neutral of direction
     double output = Math.abs(error / requestedRotation) * MAX_POWER;
@@ -62,13 +64,13 @@ public class DriveToAngle extends CommandBase {
     // determine the direction
     // if I was trying to go a positive angle change from the start
     if(requestedRotation > 0){
-      if(error > 0) return -output; // move in a positive direction
-      else return output; // compensate for over-turning by going a negative direction
+      if(error > 0) return output; // move in a positive direction
+      else return -output; // compensate for over-turning by going a negative direction
     }
     // if I was trying to go a negative angle from the start
     else{
-      if(error < 0) return output; // move in a negative direction as intended
-      else return -output; // compensate for over-turning by moving a positive direction
+      if(error < 0) return -output; // move in a negative direction as intended
+      else return output; // compensate for over-turning by moving a positive direction
     }
   }
 
@@ -76,7 +78,8 @@ public class DriveToAngle extends CommandBase {
   @Override
   public void execute() {
     // if we triggered a setPoint
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
+    //SmartDashboard.putNumber("Checks", check);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -84,8 +87,8 @@ public class DriveToAngle extends CommandBase {
   public boolean isFinished() {
     //return true; // disable this command since our gyro broke
     //
-    return RobotContainer.drivymcDriveDriverson.leftSide.get() == 0
-        && Math.abs(drive.gyro.getAngle() - target) < Constants.DriveConstants.ANGLE_TOLERANCE;
+    return check >= ENOUGH_CHECKS && Math.abs(drive.gyro.getRawAngle() - target) < Constants.DriveConstants.ANGLE_TOLERANCE;
+
     //
   }
 

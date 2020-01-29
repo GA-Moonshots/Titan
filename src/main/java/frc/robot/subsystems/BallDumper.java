@@ -8,13 +8,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 /**
  * * Instantiates the drive system with a gyro
@@ -28,12 +27,13 @@ public class BallDumper extends SubsystemBase {
   // The full range of motion (in meaningful external units) is 0-180 (this could be degrees, for instance)
   // The "starting point" of the motion, i.e. where the mechanism is located when the potentiometer reads 0v, is 30.
   public AnalogPotentiometer turnySensorThing = new AnalogPotentiometer(0);
-  //public Servo servo1 = new Servo(0);
 
-  public BallDumper(){    
-    // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
-    // linking motors to ports
-     
+  // Servos must be plugged into the Roborio itself, not the extention board, as it does not provide enough power.
+  public Servo servo1 = new Servo(0);
+  //public Servo servo2 = new Servo(?);
 
+  public BallDumper(){
+    //RobotContainer.dumpymcDumpDumperson.servo1.setAngle(180);
+    //RobotContainer.dumpymcDumpDumperson.servo2.setAngle(180);
     }
   }

@@ -24,7 +24,8 @@ public final class Constants {
     public static int bBUTTON_NUM = 2;
     public static int yBUTTON_NUM = 4;
     public static int LEFTSTICKCLICK_NUM = 9;
-    public static final int kDriverControllerPort = 0;
+    public static final int XBOX_PORT = 0;
+    public static final int JOYSTICK_PORT = 1;
 
   }
 
@@ -35,7 +36,9 @@ public final class Constants {
     public static int BACK_RIGHT = 8;
     public static int FRONT_LEFT = 4;
     public static int BACK_LEFT = 3;
-    public static int DUMPER = 0;
+    public static int DUMPER = 10;
+    public static int WINCH_LEFT = 1;
+    public static int WINCH_RIGHT = 6;
 
     public static double ANGLE_TOLERANCE = 2.0;
   
