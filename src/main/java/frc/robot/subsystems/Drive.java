@@ -7,11 +7,17 @@
 
 package frc.robot.subsystems;
 
+
+
+import com.revrobotics.Rev2mDistanceSensor;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.Ultrasonic.Unit;
+
+// LOCAL IMPORTS
 import frc.robot.Constants;
 
 
@@ -22,20 +28,16 @@ public class Drive extends SubsystemBase {
   
   // here's a gyro
   public GyroWrapper gyro = new GyroWrapper();
-  public UltrasonicWrapper ultrasonic1 = new UltrasonicWrapper(0, 1, Unit.kInches);
-  public UltrasonicWrapper ultrasonic2 = new UltrasonicWrapper(2, 3, Unit.kInches);
-  //public Ultrasonic ultrasonic = new Ultrasonic(0, 1);
-  
-  
 
+  public Rev2mDistanceSensor rightDistanceSensor = new Rev2mDistanceSensor(Port.kMXP);
+  public Rev2mDistanceSensor leftDistanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
+  
   // here's some motors
   public Jaguar frontLeftMotor;
   public Jaguar backLeftMotor;
   public Jaguar frontRightMotor;
   public Jaguar backRightMotor;
 
-  // drive system
-  //public DifferentialDrive drive;
   public MecanumDrive dMecanumDrive;
 
   // grouping the motors
@@ -47,11 +49,8 @@ public class Drive extends SubsystemBase {
   public SpeedControllerGroup leftSide;
 
 
-
-  public double pidTune;
-
   public Drive(){    
-    // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
+
     gyro.reset();
     // linking motors to ports
     frontLeftMotor = new Jaguar(Constants.DriveConstants.FRONT_LEFT);
@@ -66,23 +65,19 @@ public class Drive extends SubsystemBase {
     frontLeft.setInverted(true);
     backRight = new SpeedControllerGroup(backRightMotor);
     backLeft = new SpeedControllerGroup(backLeftMotor);
-    //rightSide = new SpeedControllerGroup(rightMotor1, rightMotor2);
-    //leftSide = new SpeedControllerGroup(leftMotor1, leftMotor2);
 
     // making a mecanum drive
     dMecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     dMecanumDrive.setRightSideInverted(false);
-
- 
-    //int raw = analogSensor.getValue();
-    //double volts = analogSensor.getVoltage();
-    //int averageRaw = analogSensor.getAverageValue();
-    ultrasonic1.setAutomaticMode(true);
-    ultrasonic2.setAutomaticMode(true);
     
-    //AnalogInput.setGlobalSampleRate(62500);
+    /**
+     * Before measurements can be read from the sensor, setAutomaticMode(true)
+     * must be called. This starts a background thread which will periodically
+     * poll all enabled sensors and store their measured range.
+    */
+    rightDistanceSensor.setAutomaticMode(true);
+    leftDistanceSensor.setAutomaticMode(true);
     
-
     
   }
 

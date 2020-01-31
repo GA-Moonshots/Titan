@@ -9,9 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.util.Color;
-import com.revrobotics.ColorSensorV3;
-import edu.wpi.first.wpilibj.I2C;
+
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.autonomous.*;
 //import frc.robot.commands.DumpNear;
@@ -20,12 +18,12 @@ import frc.robot.subsystems.BallDumper;
 import frc.robot.subsystems.ButtWheel;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import com.revrobotics.Rev2mDistanceSensor.Port;
 
 import frc.robot.Constants.OIConstants;
 
@@ -41,14 +39,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public static Drive drivymcDriveDriverson = new Drive();
-  public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
-  public static BallDumper dumpymcDumpDumperson = new BallDumper();
-  public static Climb climbymcClimbClimberson = new Climb();
+  // we don't make them static because this container is instantiated in Robot.java
+  public Drive drivymcDriveDriverson = new Drive();
+  public ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
+  public BallDumper dumpymcDumpDumperson = new BallDumper();
+  public Climb climbymcClimbClimberson = new Climb();
 
-
-  public static XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
-  public static Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
+  public XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
+  public Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
 
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
 
@@ -66,9 +64,7 @@ public class RobotContainer {
     m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
     SmartDashboard.putData("Auto mode", m_chooser);
     
-
-    
-
+    // SET DEFAULT COMMANDS
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
   }
   /**
@@ -120,7 +116,12 @@ public class RobotContainer {
     ///////////////////////////////////////////////////////////////////////////////////
 
     new JoystickButton(JoystickController, 1)
-    .whenPressed(new DriveSquareUp());
+    .whenPressed(new DumpLift());
+
+    new JoystickButton(JoystickController, 2)
+    .whenPressed(new DumpDown());
+
+    new JoystickButton(JoystickController, 3);
     
   }
 

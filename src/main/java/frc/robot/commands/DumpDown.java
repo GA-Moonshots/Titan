@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -20,7 +20,7 @@ public class DumpDown extends CommandBase {
 
   public DumpDown() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.dumpymcDumpDumperson);
+    addRequirements(Robot.container.dumpymcDumpDumperson);
   }
 
   // Called just before this Command runs the first time
@@ -32,15 +32,15 @@ public class DumpDown extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    if (RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() > 0.994)
-      RobotContainer.dumpymcDumpDumperson.motor.set(-0.3);
+    if (Robot.container.dumpymcDumpDumperson.turnySensorThing.get() > 0.994)
+      Robot.container.dumpymcDumpDumperson.motor.set(-0.3);
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() < 0.995;
+    return Robot.container.dumpymcDumpDumperson.turnySensorThing.get() < 0.995;
     //Low value 3909
     //High value 3952
   }
@@ -48,7 +48,7 @@ public class DumpDown extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.dumpymcDumpDumperson.motor.set(0);
+    Robot.container.dumpymcDumpDumperson.motor.set(0);
   }
 
 }

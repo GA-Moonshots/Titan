@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -20,7 +20,7 @@ public class DriveTimeLeft extends CommandBase {
 
   public DriveTimeLeft(double time) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(Robot.container.drivymcDriveDriverson);
     this.time = time;
   }
 
@@ -34,7 +34,7 @@ public class DriveTimeLeft extends CommandBase {
   @Override
   public void execute() {
       count ++;
-      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, -0.30, 0);
+      Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, -0.30, 0);
     }
 
 
@@ -47,7 +47,7 @@ public class DriveTimeLeft extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

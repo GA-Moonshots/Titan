@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 /**
  * * Instantiates the drive system with a gyro
  */
 public class BallDumper extends SubsystemBase {
 
+  public boolean isDumpOpen;
   // here's some motors
   private Jaguar dumperMotor = new Jaguar(Constants.DriveConstants.DUMPER);
   public SpeedControllerGroup motor = new SpeedControllerGroup(dumperMotor);

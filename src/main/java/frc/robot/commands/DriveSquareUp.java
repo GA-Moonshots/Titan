@@ -1,8 +1,10 @@
 package frc.robot.commands;
 
+import com.revrobotics.Rev2mDistanceSensor;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
@@ -10,16 +12,16 @@ import frc.robot.subsystems.Drive;
 
 public class DriveSquareUp extends CommandBase {
 
-  double sensor1 = RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches();
-  double sensor2 = RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches();
+  private Rev2mDistanceSensor leftSensor =  Robot.container.drivymcDriveDriverson.leftDistanceSensor;
+  private Rev2mDistanceSensor rightSensor =  Robot.container.drivymcDriveDriverson.rightDistanceSensor;
   private double target;
   private int check;
 
-  private Drive drive = RobotContainer.drivymcDriveDriverson;
+  private Drive drive = Robot.container.drivymcDriveDriverson;
   
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(Robot.container.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +38,7 @@ public class DriveSquareUp extends CommandBase {
     int ENOUGH_CHECKS = 15; // how many times do we pass our target until we're satisfied?
 
     // determine the error
-    double error = Math.abs(sensor1 - sensor2);
+    double error = Math.abs(rightSensor.getRange() - leftSensor.getRange());
 
     // determine the power output neutral of direction
     double output = Math.abs(error) * MAX_POWER;
@@ -50,7 +52,7 @@ public class DriveSquareUp extends CommandBase {
 
     // determine the direction
     // if I was trying to go a positive angle change from the start
-    if(sensor1 > sensor2){
+    if(rightSensor.getRange() > leftSensor.getRange()){
       if(error > 0) return -output; // move in a positive direction
       else return output; // compensate for over-turning by going a negative direction
     }
@@ -64,22 +66,19 @@ public class DriveSquareUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-      //if(java.lang.Double.isInfinite(sensor1) == false && java.lang.Double.isInfinite(sensor2) == false){
-        RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(notReallyPID(), 0, 0);
-      }
-    //}
+    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
+  }
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    System.out.println("Right sensor reads " + RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches() + " and left sensor reads " + RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches());
-    return Math.abs(RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches() - RobotContainer.drivymcDriveDriverson.ultrasonic2.getRangeInches()) < 1;
+    return Math.abs(rightSensor.getRange() - leftSensor.getRange()) < 1;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

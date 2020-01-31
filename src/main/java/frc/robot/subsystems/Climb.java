@@ -20,8 +20,11 @@ public class Climb extends SubsystemBase {
   // here's some motors
   private Jaguar rightMotor = new Jaguar(Constants.DriveConstants.WINCH_RIGHT);
   private Jaguar leftMotor = new Jaguar(Constants.DriveConstants.WINCH_LEFT);
+  //private Jaguar rightMotor2 = new Jaguar(Constants.DriveConstants.WINCH_RIGHT);
+  //private Jaguar leftMotor2 = new Jaguar(Constants.DriveConstants.WINCH_LEFT);
 
   public SpeedControllerGroup winchMotors;
+  public SpeedControllerGroup elevatorMotors;
 
   
   public Climb(){    
@@ -29,6 +32,7 @@ public class Climb extends SubsystemBase {
     // linking motors to ports
     //leftMotor.setInverted(true);  
     winchMotors = new SpeedControllerGroup(rightMotor, leftMotor);
+    //elevatorMotors = new SpeedControllerGroup(rightMotor2, leftMotor2);
 
 
     }

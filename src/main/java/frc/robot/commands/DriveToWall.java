@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -17,7 +17,7 @@ public class DriveToWall extends CommandBase {
 
   public DriveToWall() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(Robot.container.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
@@ -30,19 +30,19 @@ public class DriveToWall extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, -0.2);
+    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, -0.2);
      }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.drivymcDriveDriverson.ultrasonic1.getRangeInches() < 20;
+    return Robot.container.drivymcDriveDriverson.rightDistanceSensor.getRange() < 20;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }
