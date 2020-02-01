@@ -105,7 +105,7 @@ public class RobotContainer {
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)
-    .whenPressed(new DriveSquareUp());
+    .whenPressed(new Spin());
 
     // Right Stick
     new JoystickButton(XboxController, Button.kStickRight.value)

@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
 
-  public static RobotContainer container;
+  public static RobotContainer container = new RobotContainer();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    container = new RobotContainer();
 
    
   }
