@@ -38,16 +38,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * (including subsystems, commands, and button mappings) should be declared here.
 */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  // we don't make them static because this container is instantiated in Robot.java
-  public Drive drivymcDriveDriverson = new Drive();
-  public ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
-  public BallDumper dumpymcDumpDumperson = new BallDumper();
-  public Climb climbymcClimbClimberson = new Climb();
+  // The robot's subsystems and commands are defined here...\
 
-  public XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
-  public Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
+  // STATIC SUBSYSTEMS
+  public static Drive drivymcDriveDriverson = new Drive();
+  public static ButtWheel spinnymcSpinSpinnerson = new ButtWheel();
+  public static BallDumper dumpymcDumpDumperson = new BallDumper();
+  public static Climb climbymcClimbClimberson = new Climb();
 
+  public static XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
+  public static Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
+  
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
 
 

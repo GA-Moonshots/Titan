@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class ElevatorExtend extends CommandBase {
 
@@ -27,7 +28,7 @@ public class ElevatorExtend extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.container.climbymcClimbClimberson.elevatorMotors.set(0.5);
+    RobotContainer.climbymcClimbClimberson.elevatorMotors.set(0.5);
     
         
   }
@@ -41,7 +42,7 @@ public class ElevatorExtend extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interupted) {
-    Robot.container.climbymcClimbClimberson.elevatorMotors.set(0);
+    RobotContainer.climbymcClimbClimberson.elevatorMotors.set(0);
  }
 
 }

@@ -11,13 +11,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.RobotContainer;
 
 public class ButtSpin extends CommandBase {
   private boolean spinToColor;
 
   public ButtSpin(boolean spinToColor) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.container.spinnymcSpinSpinnerson);
+    addRequirements(RobotContainer.spinnymcSpinSpinnerson);
     this.spinToColor = spinToColor;
 
   }
@@ -30,7 +32,7 @@ public class ButtSpin extends CommandBase {
   }
 
   public String getColor(){
-    Color reading = Robot.container.spinnymcSpinSpinnerson.colorSensor.getColor();
+    Color reading = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor();
     double blue = reading.blue;
     double red = reading.red;
     double green = reading.green;

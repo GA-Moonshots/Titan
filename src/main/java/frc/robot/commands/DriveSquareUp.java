@@ -5,6 +5,8 @@ import com.revrobotics.Rev2mDistanceSensor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
@@ -12,16 +14,16 @@ import frc.robot.subsystems.Drive;
 
 public class DriveSquareUp extends CommandBase {
 
-  private Rev2mDistanceSensor leftSensor =  Robot.container.drivymcDriveDriverson.leftDistanceSensor;
-  private Rev2mDistanceSensor rightSensor =  Robot.container.drivymcDriveDriverson.rightDistanceSensor;
+  private Rev2mDistanceSensor leftSensor =  RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
+  private Rev2mDistanceSensor rightSensor =  RobotContainer.drivymcDriveDriverson.rightDistanceSensor;
   private double target;
   private int check;
 
-  private Drive drive = Robot.container.drivymcDriveDriverson;
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
   
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.container.drivymcDriveDriverson);
+    addRequirements(RobotContainer.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
@@ -66,7 +68,7 @@ public class DriveSquareUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
   }
 
   // Make this return true  when this Command no longer needs to run execute()
@@ -78,7 +80,7 @@ public class DriveSquareUp extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

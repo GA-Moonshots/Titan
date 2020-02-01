@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -20,7 +21,7 @@ public class DumpLift extends CommandBase {
 
   public DumpLift() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.container.dumpymcDumpDumperson);
+    addRequirements(RobotContainer.dumpymcDumpDumperson);
   }
 
   // Called just before this Command runs the first time
@@ -33,14 +34,14 @@ public class DumpLift extends CommandBase {
   @Override
   public void execute() {
       count ++;
-      Robot.container.dumpymcDumpDumperson.motor.set(0.7);
+      RobotContainer.dumpymcDumpDumperson.motor.set(0.7);
     }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return Robot.container.dumpymcDumpDumperson.turnySensorThing.get() > 0.996;
+    return RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() > 0.996;
     //Low value 3909
     //High value 3952
   }
@@ -48,7 +49,7 @@ public class DumpLift extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.container.dumpymcDumpDumperson.motor.set(0);
+    RobotContainer.dumpymcDumpDumperson.motor.set(0);
   }
 
 }

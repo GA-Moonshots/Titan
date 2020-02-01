@@ -11,6 +11,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.RobotContainer;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -22,20 +24,20 @@ public class DriveCommand extends CommandBase {
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.container.drivymcDriveDriverson);
+    addRequirements(RobotContainer.drivymcDriveDriverson);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
     driveStraight = !driveStraight;    
-    this.driveStraightAt = Robot.container.drivymcDriveDriverson.gyro.getRawAngle();
+    this.driveStraightAt = RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    switch(Robot.container.XboxController.getPOV()){
+    switch(RobotContainer.XboxController.getPOV()){
       case -1:   break;
       // SAVED POSITION HIGH   
       //dpad up 
@@ -61,10 +63,10 @@ public class DriveCommand extends CommandBase {
     //MANUAL DEAD ZONE
     double dead = 0.15;
 
-    double valueleftx = Robot.container.XboxController.getRawAxis(0);
-    double valuelefty = Robot.container.XboxController.getRawAxis(1);
-    double valuerightx = Robot.container.XboxController.getRawAxis(4);
-    double valuerighty =Robot.container.XboxController.getRawAxis(5);
+    double valueleftx = RobotContainer.XboxController.getRawAxis(0);
+    double valuelefty = RobotContainer.XboxController.getRawAxis(1);
+    double valuerightx = RobotContainer.XboxController.getRawAxis(4);
+    double valuerighty =RobotContainer.XboxController.getRawAxis(5);
 
     if(Math.abs(valueleftx) < dead){
       valueleftx = 0;
@@ -98,12 +100,12 @@ public class DriveCommand extends CommandBase {
     // }
 
     if(true == false && Math.abs(valueleftx) > 0){
-      double difference = driveStraightAt - Robot.container.drivymcDriveDriverson.gyro.getRawAngle();
+      double difference = driveStraightAt - RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
       double power = -0.80;
       if(valueleftx > 0) power = 0.80;
-      Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
+      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
     } else {
-      Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
+      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
     }
 
 
@@ -119,7 +121,7 @@ public class DriveCommand extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.container.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }
