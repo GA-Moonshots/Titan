@@ -64,6 +64,8 @@ public class RobotContainer {
     m_chooser.addOption("Dump them cells when far", new DumpFar());
     m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    
     
     // SET DEFAULT COMMANDS
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
@@ -94,7 +96,7 @@ public class RobotContainer {
 
     // Y button
     new JoystickButton(XboxController, Button.kY.value)
-    .whileHeld(new DumpLift());
+    .whileHeld(new Spin());
 
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
@@ -106,7 +108,7 @@ public class RobotContainer {
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)
-    .whenPressed(new Spin());
+    .whenPressed(new DumpLift());
 
     // Right Stick
     new JoystickButton(XboxController, Button.kStickRight.value)

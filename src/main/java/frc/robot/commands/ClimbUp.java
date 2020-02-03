@@ -29,7 +29,7 @@ public class ClimbUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.climbymcClimbClimberson.winchMotors.set(-0.50);
+    RobotContainer.climbymcClimbClimberson.winchMotors.set(-0.70);
     
         
   }

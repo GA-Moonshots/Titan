@@ -29,8 +29,8 @@ public class Drive extends SubsystemBase {
   // here's a gyro
   public GyroWrapper gyro = new GyroWrapper();
 
-  public Rev2mDistanceSensor rightDistanceSensor = new Rev2mDistanceSensor(Port.kMXP);
-  public Rev2mDistanceSensor leftDistanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
+  public Rev2mDistanceSensor leftDistanceSensor = new Rev2mDistanceSensor(Port.kMXP);
+  public Rev2mDistanceSensor rightDistanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
   
   // here's some motors
   public Jaguar frontLeftMotor;

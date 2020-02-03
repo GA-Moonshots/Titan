@@ -38,7 +38,7 @@ public class Spin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(0.5);
+    RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(-0.5);
 
   }
 

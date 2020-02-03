@@ -14,13 +14,12 @@ import frc.robot.subsystems.Drive;
 
 public class DriveSquareUp extends CommandBase {
 
-  private Rev2mDistanceSensor leftSensor =  RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
-  private Rev2mDistanceSensor rightSensor =  RobotContainer.drivymcDriveDriverson.rightDistanceSensor;
-  private double target;
-  private int check;
-
   private Drive drive = RobotContainer.drivymcDriveDriverson;
-  
+  private Rev2mDistanceSensor leftSensor = RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
+  private Rev2mDistanceSensor rightSensor = RobotContainer.drivymcDriveDriverson.rightDistanceSensor;
+  private int check = 0;
+  private final int TOLERANCE = 5;
+
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
     addRequirements(RobotContainer.drivymcDriveDriverson);
@@ -29,7 +28,6 @@ public class DriveSquareUp extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    //target = drive.gyro.getAngle() + requestedRotation;
     check = 0;
     
   }
@@ -38,18 +36,23 @@ public class DriveSquareUp extends CommandBase {
     double MAX_POWER = 0.45; // cap the power 
     double MIN_POWER = 0.20; // lowest effective power
     int ENOUGH_CHECKS = 15; // how many times do we pass our target until we're satisfied?
-
+    double right = rightSensor.getRange();
+    double left = leftSensor.getRange();
+    if(right == -1 || left == -1){
+      System.out.println("ERROR:MISSING READING FROM SENSOR");
+      return 0.0;
+    }
     // determine the error
-    double error = Math.abs(rightSensor.getRange() - leftSensor.getRange());
+    double error = Math.abs(right - left);
 
     // determine the power output neutral of direction
-    double output = Math.abs(error) * MAX_POWER;
+    double output = (error/10) * MAX_POWER;
     if(output < MIN_POWER) output = MIN_POWER;
     if(output > MAX_POWER) output = MAX_POWER;
 
     // are we there yet? this is to avoid ping-ponging
     // plus we never stop the method unless our output is zero
-    if(Math.abs(error) < Constants.DriveConstants.ANGLE_TOLERANCE) check++;
+    if(Math.abs(error) < TOLERANCE) check++;
     if(check > ENOUGH_CHECKS) return 0.0;
 
     // determine the direction
@@ -68,13 +71,13 @@ public class DriveSquareUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
+    drive.dMecanumDrive.driveCartesian(0, 0, notReallyPID());
   }
 
   // Make this return true  when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return Math.abs(rightSensor.getRange() - leftSensor.getRange()) < 1;
+    return Math.abs(rightSensor.getRange() - leftSensor.getRange()) < TOLERANCE;
   }
 
   // Called once after isFinished returns true
