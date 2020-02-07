@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drive;
+
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -21,6 +22,7 @@ public class DriveCommand extends CommandBase {
     private boolean notMoving = true;
     private boolean driveStraight = false;
     private double driveStraightAt;
+    private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -82,8 +84,6 @@ public class DriveCommand extends CommandBase {
     }    
     
     
-    
-    
     // // trigger assist driving straight 
     // if(valuelefty < 0 && valueleftx == 0 && notMoving){
     //   notMoving = false;
@@ -100,16 +100,20 @@ public class DriveCommand extends CommandBase {
     // }
 
     if(true == false && Math.abs(valueleftx) > 0){
-      double difference = driveStraightAt - RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
+      double difference = driveStraightAt - drive.gyro.getRawAngle();
       double power = -0.80;
       if(valueleftx > 0) power = 0.80;
-      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
+      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
     } else {
-      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
+      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
     }
 
 
 
+  }
+
+  public boolean isRobotMoving(){
+    return drive.backLeft.get() != 0 || drive.backRight.get() != 0 || drive.frontLeft.get() != 0 || drive.frontRight.get() != 0;
   }
 
   // Make this return true when this Command no longer needs to run execute()

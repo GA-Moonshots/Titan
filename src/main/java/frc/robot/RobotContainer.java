@@ -19,6 +19,7 @@ import frc.robot.subsystems.ButtWheel;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -92,11 +93,11 @@ public class RobotContainer {
 
     // A button
     new JoystickButton(XboxController, Button.kA.value)
-    .whenPressed(new DriveToAngle(180));
+    .whenPressed(new DriveToWall());
 
     // Y button
     new JoystickButton(XboxController, Button.kY.value)
-    .whileHeld(new Spin());
+    .whenPressed(new ButtSpin(true));
 
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
@@ -104,11 +105,13 @@ public class RobotContainer {
 
     // Left bumper
     new JoystickButton(XboxController, Button.kBumperLeft.value)
-    .whenPressed(new DumpOpen());
+    .whenHeld(new ElevatorRetract());
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)
-    .whenPressed(new DumpLift());
+    .whenPressed(() -> {
+      CommandScheduler.getInstance().cancelAll();
+    });
 
     // Right Stick
     new JoystickButton(XboxController, Button.kStickRight.value)
@@ -124,7 +127,22 @@ public class RobotContainer {
     new JoystickButton(JoystickController, 2)
     .whenPressed(new DumpDown());
 
-    new JoystickButton(JoystickController, 3);
+    new JoystickButton(JoystickController, 3)
+    .whenPressed(new ClimbUp());
+
+    new JoystickButton(JoystickController, 4)
+    .whenPressed(new ButtSpin(true));
+
+    new JoystickButton(JoystickController, 5)
+    .whenPressed(new ElevatorExtend());
+
+    new JoystickButton(JoystickController, 6)
+    .whenPressed(new ElevatorRetract());
+
+    new JoystickButton(JoystickController, 7)
+    .whenPressed(new ButtSpin(false));
+
+
     
   }
 

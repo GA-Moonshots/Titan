@@ -7,8 +7,16 @@
 
 package frc.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -33,9 +41,54 @@ public class Robot extends TimedRobot {
   public void robotInit() {
   
     container = new RobotContainer();
+    new Thread(() -> {
+      UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setResolution(640, 480);
+
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+
+      Mat source = new Mat();
+      Mat output = new Mat();
+
+      while(!Thread.interrupted()) {
+        if (cvSink.grabFrame(source) == 0) {
+          continue;
+        }
+        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+        outputStream.putFrame(output);
+      }
+    }).start();
    
   }
-
+/**
+ * THIS IS JUST FOR A TEST DELETE THIS METHOD
+ * @return
+ */
+  public String getColor(){
+    Color reading = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor();
+    double blue = reading.blue;
+    double red = reading.red;
+    double green = reading.green;
+    String colorInfo;
+    if (blue<0.15 && red>0.3 && green>0.5){
+      colorInfo = "Y";
+    }
+    else if (blue>red && blue>0.3 && green<0.5){
+      colorInfo = "B";
+    }
+    else if (red>blue && red>0.3 && green<0.5){
+      colorInfo = "R";
+    }
+    else if (green>blue && green>red){
+      colorInfo = "G";
+    }
+    else {
+      colorInfo = "?";
+    }
+    return colorInfo;
+  }
+ 
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -51,7 +104,13 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    
+    SmartDashboard.putString("color", getColor());
+    SmartDashboard.putNumber("red", RobotContainer.spinnymcSpinSpinnerson.colorSensor.getRed());
+    SmartDashboard.putNumber("green", RobotContainer.spinnymcSpinSpinnerson.colorSensor.getGreen());
+    SmartDashboard.putNumber("blue", RobotContainer.spinnymcSpinSpinnerson.colorSensor.getBlue());
+
+    SmartDashboard.putBoolean("Elevator Magnet", RobotContainer.climbymcClimbClimberson.elevatorMagnet.get());
+
     if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid()){
       SmartDashboard.putNumber("Right Dist", RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange());
     }

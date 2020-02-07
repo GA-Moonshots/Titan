@@ -40,6 +40,7 @@ public final class Constants {
     public static int WINCH_LEFT = 1;
     public static int WINCH_RIGHT = 6;
     public static int BUTT_WHEEL = 7;
+    public static int ELEVATOR = 2;
 
     public static double ANGLE_TOLERANCE = 2.0;
   

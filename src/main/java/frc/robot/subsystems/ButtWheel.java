@@ -14,18 +14,14 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.Jaguar;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.I2C.Port;
 
 
 
 public class ButtWheel extends SubsystemBase {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  // here's a motor i'm declaring here, sorry Mr. A it's not in a command
-  public final I2C.Port i2cPort = I2C.Port.kOnboard;
+  
   private Jaguar buttMotor = new Jaguar(Constants.DriveConstants.BUTT_WHEEL);
-  //track the desired position of the arm
-  // public int holdAt;
-  public ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+  public ColorSensorV3 colorSensor = new ColorSensorV3(Port.kMXP);
   public SpeedControllerGroup buttMotorGroup;
 
 
@@ -36,6 +32,29 @@ public class ButtWheel extends SubsystemBase {
   public ButtWheel(){
     //armEncoder.reset(); // encoder starts at zero. Max is ~900?
     buttMotorGroup = new SpeedControllerGroup(buttMotor);
+  }
 
+  public String getColor(){
+    Color reading = colorSensor.getColor();
+    double blue = reading.blue;
+    double red = reading.red;
+    double green = reading.green;
+    String colorInfo;
+    if (blue<0.15 && red>0.3 && green>0.5){
+      colorInfo = "Y";
+    }
+    else if (blue>red && blue>0.3 && green<0.5){
+      colorInfo = "B";
+    }
+    else if (red>blue && red>0.3 && green<0.5){
+      colorInfo = "R";
+    }
+    else if (green>blue && green>red){
+      colorInfo = "G";
+    }
+    else {
+      colorInfo = "?";
+    }
+    return colorInfo;
   }
 }

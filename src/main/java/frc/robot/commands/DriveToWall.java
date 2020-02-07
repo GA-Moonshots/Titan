@@ -8,11 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-/**
- * Responding to motor control. Runs infinitely
- */
+
 
 public class DriveToWall extends CommandBase {
 
@@ -31,13 +28,15 @@ public class DriveToWall extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, -0.2);
+    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, -0.2, 0);
      }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
+    if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid())
     return RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange() < 20;
+    else return false;
   }
 
   // Called once after isFinished returns true

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
@@ -15,10 +14,10 @@ import frc.robot.subsystems.Drive;
 public class DriveSquareUp extends CommandBase {
 
   private Drive drive = RobotContainer.drivymcDriveDriverson;
-  private Rev2mDistanceSensor leftSensor = RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
   private Rev2mDistanceSensor rightSensor = RobotContainer.drivymcDriveDriverson.rightDistanceSensor;
+  private Rev2mDistanceSensor leftSensor = RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
   private int check = 0;
-  private final int TOLERANCE = 5;
+  private final double TOLERANCE = 0.2;
 
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
@@ -33,9 +32,9 @@ public class DriveSquareUp extends CommandBase {
   }
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
-    double MAX_POWER = 0.45; // cap the power 
-    double MIN_POWER = 0.20; // lowest effective power
-    int ENOUGH_CHECKS = 15; // how many times do we pass our target until we're satisfied?
+    double MAX_POWER = 0.30; // cap the power 
+    double MIN_POWER = 0.15; // lowest effective power
+    int ENOUGH_CHECKS = 30; // how many times do we pass our target until we're satisfied?
     double right = rightSensor.getRange();
     double left = leftSensor.getRange();
     if(right == -1 || left == -1){
@@ -46,7 +45,7 @@ public class DriveSquareUp extends CommandBase {
     double error = Math.abs(right - left);
 
     // determine the power output neutral of direction
-    double output = (error/10) * MAX_POWER;
+    double output = (error/20) * MAX_POWER;
     if(output < MIN_POWER) output = MIN_POWER;
     if(output > MAX_POWER) output = MAX_POWER;
 
@@ -63,7 +62,7 @@ public class DriveSquareUp extends CommandBase {
     }
     // if I was trying to go a negative angle from the start
     else{
-      if(error < 0) return output; // move in a negative direction as intended
+      if(error > 0) return output; // move in a negative direction as intended
       else return -output; // compensate for over-turning by moving a positive direction
     }
   }

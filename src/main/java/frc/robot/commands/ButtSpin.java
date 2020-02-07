@@ -8,14 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.ButtWheel;
 
 public class ButtSpin extends CommandBase {
+
   private boolean spinToColor;
+  private String gameData;
+  private int count = 0;
+  private ButtWheel buttWheel = RobotContainer.spinnymcSpinSpinnerson;
+  private String lastReading;
 
   public ButtSpin(boolean spinToColor) {
     // Use requires() here to declare subsystem dependencies
@@ -27,70 +33,41 @@ public class ButtSpin extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    // TODO: Make sure butt wheel is extended
-    
+    count = 0;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();  
   }
-
-  public String getColor(){
-    Color reading = RobotContainer.spinnymcSpinSpinnerson.colorSensor.getColor();
-    double blue = reading.blue;
-    double red = reading.red;
-    double green = reading.green;
-    String colorInfo;
-    if (blue<0.15 && red>0.3 && green>0.5){
-      colorInfo = "Y";
-    }
-    else if (blue>red && blue>0.3 && green<0.5){
-      colorInfo = "B";
-    }
-    else if (red>blue && red>0.3 && green<0.5){
-      colorInfo = "R";
-    }
-    else if (green>blue && green>red){
-      colorInfo = "G";
-    }
-    else {
-      colorInfo = "?";
-    }
-    return colorInfo;
-  }
+ 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-
+    String reading = buttWheel.getColor();
     if(spinToColor){
-      String gameData;
-      gameData = DriverStation.getInstance().getGameSpecificMessage();
-      while(!gameData.equals(getColor())){
-        // TODO: Motors, apply power to butt wheel
+      if(!gameData.equals(reading)){
+        RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(.15);
       }
 
     }
     else{
-      String reading = getColor();
-      int count = 0;
-      while(count < 24){
-        // TODO: Butt wheel motors
-        if(!getColor().equals(reading)){
-          count++;
-          reading = getColor();
-        }
-        // TODO: Butt wheel motors
+      RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(.15);
+      if(count == 0 || !reading.equals(lastReading)){
+        count++;
+        lastReading = reading;
       }
     }
-        
+    SmartDashboard.putNumber("butt count", count);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return false;
+   if(spinToColor) return buttWheel.getColor().equals(gameData);
+   return count >= 28;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interupted) {
-    // TODO: Kill moters
+    buttWheel.buttMotorGroup.set(0);
   }
 
 }
