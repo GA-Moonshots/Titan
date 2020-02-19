@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.groups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveSquareUp;
@@ -11,32 +11,32 @@ import frc.robot.commands.DumpToggle;
 import frc.robot.commands.DumpOpen;
 import frc.robot.commands.DumpDown;
 
+public class DumpMid extends SequentialCommandGroup {
 
-public class DumpFar extends SequentialCommandGroup {
-
-    public DumpFar() {
+    public DumpMid() {
         addCommands(
-            //Go forward
+            //Drive to wall
             new DriveToWall(),
             //Align with the wall
             new DriveSquareUp(),
-            //Double check alignment
+            //Double checking the alignment
             new DriveSquareUp(),
-            //Go right
-            new DriveTimeRight(2),
+            //Drive right
+            new DriveTimeRight(1),
             //Dump cells
+
             //new DumpLift(),
-
+    
             //new DumpOpen(),
-
+            
             //new DumpClose(),
 
             //new DumpDown(),
-
-            new DriveTimeReverse(2)
-
+    
+            new DriveTimeReverse(1)
+    
+            
         );
 
     }
-
 }

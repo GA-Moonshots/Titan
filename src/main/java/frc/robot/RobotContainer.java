@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.autonomous.*;
+import frc.robot.commands.groups.*;
 //import frc.robot.commands.DumpNear;
 import frc.robot.commands.*;
 import frc.robot.subsystems.BallDumper;

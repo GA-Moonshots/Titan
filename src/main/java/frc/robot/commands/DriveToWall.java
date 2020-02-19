@@ -34,8 +34,8 @@ public class DriveToWall extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid())
-    return RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange() < 20;
+    if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid() || RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid())
+    return RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange() < 20 || RobotContainer.drivymcDriveDriverson.leftDistanceSensor.getRange() < 20;
     else return false;
   }
 
