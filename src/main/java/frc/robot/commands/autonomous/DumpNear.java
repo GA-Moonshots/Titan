@@ -1,6 +1,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveSquareUp;
 import frc.robot.commands.DriveTimeReverse;
 import frc.robot.commands.DriveTimeRight;
 import frc.robot.commands.DriveToWall;
@@ -16,6 +17,10 @@ public class DumpNear extends SequentialCommandGroup {
         addCommands(
             //Drive to wall
             new DriveToWall(),
+            //Align to wall
+            new DriveSquareUp(),
+            //Double check alignmnet
+            new DriveSquareUp(),
             //Dump cells
 
             //new DumpLift(),

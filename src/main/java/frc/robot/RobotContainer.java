@@ -85,11 +85,11 @@ public class RobotContainer {
 
     // X button
     new JoystickButton(XboxController, Button.kX.value)
-    .whileHeld(new DumpDown());
+    .whenPressed(new DriveSquareUp());
     
     // B button
     new JoystickButton(XboxController, Button.kB.value)
-    .whileHeld(new ClimbUp());
+    .whenPressed(new DriveToAngle(180));
 
     // A button
     new JoystickButton(XboxController, Button.kA.value)
@@ -101,7 +101,7 @@ public class RobotContainer {
 
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
-    .whenPressed(new DumpClose()); 
+    .whenHeld(new ElevatorExtend()); 
 
     // Left bumper
     new JoystickButton(XboxController, Button.kBumperLeft.value)
@@ -115,7 +115,9 @@ public class RobotContainer {
 
     // Right Stick
     new JoystickButton(XboxController, Button.kStickRight.value)
-    .whenPressed(new DriveSquareUp());
+    .whenPressed(() -> {
+      CommandScheduler.getInstance().cancelAll();
+    });
 
     ///////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////*** JOYSTICK BINDINGS ***/////////////////////////////

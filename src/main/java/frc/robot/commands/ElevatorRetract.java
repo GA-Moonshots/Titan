@@ -28,7 +28,7 @@ public class ElevatorRetract extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.climbymcClimbClimberson.elevatorMotorGroup.set(-0.35);
+    RobotContainer.climbymcClimbClimberson.elevatorMotorGroup.set(-0.10);
     
         
   }

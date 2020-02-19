@@ -1,6 +1,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveSquareUp;
 import frc.robot.commands.DriveTimeReverse;
 import frc.robot.commands.DriveTimeRight;
 import frc.robot.commands.DriveToWall;
@@ -17,6 +18,10 @@ public class DumpFar extends SequentialCommandGroup {
         addCommands(
             //Go forward
             new DriveToWall(),
+            //Align with the wall
+            new DriveSquareUp(),
+            //Double check alignment
+            new DriveSquareUp(),
             //Go right
             new DriveTimeRight(2),
             //Dump cells

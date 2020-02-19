@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
@@ -28,7 +29,7 @@ public class Climb extends SubsystemBase {
   public SpeedControllerGroup winchMotors;
   public SpeedControllerGroup elevatorMotorGroup;
   
-  public DigitalInput elevatorMagnet = new DigitalInput(0);
+  public Encoder encoder = new Encoder(1, 2);
 
   
   public Climb(){    

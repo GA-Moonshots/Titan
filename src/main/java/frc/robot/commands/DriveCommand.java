@@ -112,10 +112,6 @@ public class DriveCommand extends CommandBase {
 
   }
 
-  public boolean isRobotMoving(){
-    return drive.backLeft.get() != 0 || drive.backRight.get() != 0 || drive.frontLeft.get() != 0 || drive.frontRight.get() != 0;
-  }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {

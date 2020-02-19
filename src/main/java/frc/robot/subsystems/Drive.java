@@ -48,7 +48,6 @@ public class Drive extends SubsystemBase {
   public SpeedControllerGroup rightSide;
   public SpeedControllerGroup leftSide;
 
-
   public Drive(){    
 
     gyro.reset();
@@ -80,5 +79,8 @@ public class Drive extends SubsystemBase {
     
     
   }
-
+  public boolean isMoving(){
+    return this.backLeft.get() != 0 || this.backRight.get() != 0 || this.frontLeft.get() != 0 || this.frontRight.get() != 0;
   }
+
+}

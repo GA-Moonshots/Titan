@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 /**
  * * Instantiates the drive system with a gyro
@@ -30,7 +31,7 @@ public class BallDumper extends SubsystemBase {
 
   // Servos must be plugged into the Roborio itself, not the extention board, as it does not provide enough power.
   public Servo servo1 = new Servo(0);
-  //public Servo servo2 = new Servo(?);
+  //public Servo servo2 = new Servo(1);
 
   public BallDumper(){
     //RobotContainer.dumpymcDumpDumperson.servo1.setAngle(180);

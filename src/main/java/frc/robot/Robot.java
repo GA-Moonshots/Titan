@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("green", RobotContainer.spinnymcSpinSpinnerson.colorSensor.getGreen());
     SmartDashboard.putNumber("blue", RobotContainer.spinnymcSpinSpinnerson.colorSensor.getBlue());
 
-    SmartDashboard.putBoolean("Elevator Magnet", RobotContainer.climbymcClimbClimberson.elevatorMagnet.get());
+    SmartDashboard.putNumber("Elevator Encoder", RobotContainer.climbymcClimbClimberson.encoder.get());
 
     if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid()){
       SmartDashboard.putNumber("Right Dist", RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange());
