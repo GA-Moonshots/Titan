@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-
-
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
 
@@ -52,10 +50,10 @@ public class Drive extends SubsystemBase {
 
     gyro.reset();
     // linking motors to ports
-    frontLeftMotor = new Jaguar(Constants.DriveConstants.FRONT_LEFT);
-    backLeftMotor = new Jaguar(Constants.DriveConstants.BACK_LEFT);
-    frontRightMotor = new Jaguar(Constants.DriveConstants.FRONT_RIGHT);
-    backRightMotor = new Jaguar(Constants.DriveConstants.BACK_RIGHT);
+    frontLeftMotor = new Jaguar(Constants.PWDConstants.FRONT_LEFT);
+    backLeftMotor = new Jaguar(Constants.PWDConstants.BACK_LEFT);
+    frontRightMotor = new Jaguar(Constants.PWDConstants.FRONT_RIGHT);
+    backRightMotor = new Jaguar(Constants.PWDConstants.BACK_RIGHT);
     
     // setting up the motor groups
     frontRight = new SpeedControllerGroup(frontRightMotor);

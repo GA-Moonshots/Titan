@@ -8,9 +8,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 
@@ -19,10 +17,9 @@ import frc.robot.subsystems.Drive;
  */
 public class DriveCommand extends CommandBase {
 
-    private boolean notMoving = true;
-    private boolean driveStraight = false;
-    private double driveStraightAt;
-    private Drive drive = RobotContainer.drivymcDriveDriverson;
+  private boolean driveStraight = false;
+  private double driveStraightAt;
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -33,7 +30,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void initialize() {
     driveStraight = !driveStraight;    
-    this.driveStraightAt = RobotContainer.drivymcDriveDriverson.gyro.getRawAngle();
+    this.driveStraightAt = drive.gyro.getRawAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -105,7 +102,7 @@ public class DriveCommand extends CommandBase {
       if(valueleftx > 0) power = 0.80;
       drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
     } else {
-      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, valuerightx);
+      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
     }
 
 
@@ -121,7 +118,7 @@ public class DriveCommand extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    drive.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

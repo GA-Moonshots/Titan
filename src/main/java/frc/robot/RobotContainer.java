@@ -9,27 +9,20 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.groups.*;
-//import frc.robot.commands.DumpNear;
-import frc.robot.commands.*;
-import frc.robot.subsystems.BallDumper;
-import frc.robot.subsystems.ButtWheel;
-import frc.robot.subsystems.Climb;
-import frc.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import com.revrobotics.Rev2mDistanceSensor.Port;
 
 import frc.robot.Constants.OIConstants;
-
-import static edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.groups.*;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 
 /**
@@ -49,6 +42,8 @@ public class RobotContainer {
 
   public static XboxController XboxController = new XboxController(OIConstants.XBOX_PORT);
   public static Joystick JoystickController = new Joystick(OIConstants.JOYSTICK_PORT);
+
+  public static Timer timer = new Timer();
   
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
 
@@ -59,15 +54,16 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_chooser.setDefaultOption("Drive FWD", new DriveTimeReverse(5));
+
+    // BUILD AUTONOMOUS OPTIONS
+    m_chooser.setDefaultOption("Drive Reverse", new DriveTimeReverse(5));
+    m_chooser.setDefaultOption("Drive Forward", new DriveTimeForward(5));
     m_chooser.addOption("Rotate 90 Degrees", new DriveToAngle(90));
-    m_chooser.addOption("Dump them cells when near", new DumpNear());
-    m_chooser.addOption("Dump them cells when far", new DumpFar());
-    m_chooser.addOption("Dump them cells at a medium distance", new DumpMid());
+    m_chooser.addOption("Dump is straight ahead", new DumpStraightAhead());
+    m_chooser.addOption("Dump is far away", new DumpFromFarPos());
+    m_chooser.addOption("Dump them cells at a medium distance", new DumpFromMidPos());
     SmartDashboard.putData("Auto mode", m_chooser);
 
-    
-    
     // SET DEFAULT COMMANDS
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
   }
@@ -93,7 +89,7 @@ public class RobotContainer {
 
     // A button
     new JoystickButton(XboxController, Button.kA.value)
-    .whenPressed(new DriveToWall());
+    .whenPressed(new DriveToAngle(180));
 
     // Y button
     new JoystickButton(XboxController, Button.kY.value)
@@ -101,11 +97,11 @@ public class RobotContainer {
 
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
-    .whenHeld(new ElevatorExtend()); 
+    .whenHeld(new ClimbElevatorUp()); 
 
     // Left bumper
     new JoystickButton(XboxController, Button.kBumperLeft.value)
-    .whenHeld(new ElevatorRetract());
+    .whenHeld(new DriveSquareUp());
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)
@@ -124,10 +120,10 @@ public class RobotContainer {
     ///////////////////////////////////////////////////////////////////////////////////
 
     new JoystickButton(JoystickController, 1)
-    .whenPressed(new DumpLift());
+    .whenPressed(new ClimbUp());
 
     new JoystickButton(JoystickController, 2)
-    .whenPressed(new DumpDown());
+    .whenPressed(new ClimbUp());
 
     new JoystickButton(JoystickController, 3)
     .whenPressed(new ClimbUp());
@@ -136,15 +132,22 @@ public class RobotContainer {
     .whenPressed(new ButtSpin(true));
 
     new JoystickButton(JoystickController, 5)
-    .whenPressed(new ElevatorExtend());
+    .whenHeld(new ClimbElevatorUp());
 
     new JoystickButton(JoystickController, 6)
-    .whenPressed(new ElevatorRetract());
+    .whenHeld(new ClimbElevatorDown(false));
+
+    new JoystickButton(JoystickController, 12)
+    .whenHeld(new ClimbElevatorDown(true));
 
     new JoystickButton(JoystickController, 7)
     .whenPressed(new ButtSpin(false));
 
+    new JoystickButton(JoystickController, 8)
+    .whenPressed(new DumpOpen());
 
+    new JoystickButton(JoystickController, 9)
+    .whenPressed(new DumpClose());
     
   }
 

@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -17,13 +16,11 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.I2C.Port;
 
 
-
 public class ButtWheel extends SubsystemBase {
   
-  private Jaguar buttMotor = new Jaguar(Constants.DriveConstants.BUTT_WHEEL);
+  private Jaguar buttMotor = new Jaguar(Constants.PWDConstants.BUTT_WHEEL);
   public ColorSensorV3 colorSensor = new ColorSensorV3(Port.kMXP);
   public SpeedControllerGroup buttMotorGroup;
-
 
   /**
    * Open Smart Dashboard or Shuffleboard to see the color detected by the 
@@ -32,6 +29,15 @@ public class ButtWheel extends SubsystemBase {
   public ButtWheel(){
     //armEncoder.reset(); // encoder starts at zero. Max is ~900?
     buttMotorGroup = new SpeedControllerGroup(buttMotor);
+  }
+
+  /**
+   * The robot's sensor isn't in the same position as the field's sensor. This translates what
+   * the robot sees to what the game field's sensor sees.
+   * @return color in a single character string
+   */
+  public String getOffsetColor(){
+    return "?";
   }
 
   public String getColor(){

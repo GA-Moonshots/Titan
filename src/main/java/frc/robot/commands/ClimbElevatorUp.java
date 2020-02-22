@@ -8,48 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-/**
- * Responding to motor control. Runs infinitely
- */
 
-public class DumpDown extends CommandBase {
+public class ClimbElevatorUp extends CommandBase {
 
-  private int count = 0;
-  private double time;
-
-  public DumpDown() {
+  public ClimbElevatorUp() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.dumpymcDumpDumperson);
+
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    count = 0;
+    
   }
 
+  
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    if (RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() > 0.994)
-      RobotContainer.dumpymcDumpDumperson.motor.set(-0.3);
-    }
-
+    RobotContainer.climbymcClimbClimberson.elevatorMotorGroup.set(-0.60);
+    
+        
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.dumpymcDumpDumperson.turnySensorThing.get() < 0.995;
-    //Low value 3909
-    //High value 3952
+    //return RobotContainer.climbymcClimbClimberson.encoder.getRaw() <= -5600;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.dumpymcDumpDumperson.motor.set(0);
-  }
+  public void end(boolean interupted) {
+    RobotContainer.climbymcClimbClimberson.elevatorMotorGroup.set(0);
+ }
 
 }
+

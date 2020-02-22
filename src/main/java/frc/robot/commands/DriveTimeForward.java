@@ -8,9 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drive;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -19,10 +18,11 @@ public class DriveTimeForward extends CommandBase {
 
   private int count = 0;
   private double time;
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveTimeForward(double time) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(drive);
     this.time = time;
   }
 
@@ -36,7 +36,7 @@ public class DriveTimeForward extends CommandBase {
   @Override
   public void execute() {
       count ++;
-      RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, -0.15);
+      drive.dMecanumDrive.driveCartesian(0, 0, -0.15);
     }
 
 
@@ -49,7 +49,7 @@ public class DriveTimeForward extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    drive.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

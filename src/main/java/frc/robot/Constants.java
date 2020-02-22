@@ -14,9 +14,7 @@ package frc.robot;
  * floating around.
  */
 public final class Constants {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // BUTTONS
+  
   public static final class OIConstants {
 
     public static int xBUTTON_NUM = 3;
@@ -29,32 +27,37 @@ public final class Constants {
 
   }
 
-  public static final class DriveConstants {
+  public static final class PWDConstants {
 
-    // MOTORS
-    public static int FRONT_RIGHT = 9;
-    public static int BACK_RIGHT = 8;
-    public static int FRONT_LEFT = 4;
-    public static int BACK_LEFT = 3;
-    public static int DUMPER = 17;
+    // DRIVE
+    public static int FRONT_RIGHT = 4;
+    public static int BACK_RIGHT = 3;
+    public static int FRONT_LEFT = 9;
+    public static int BACK_LEFT = 8;
+
+    // DUMP
+    public static int DUMPER_LEFT_SERVO = 0;
+    public static int DUMPER_RIGHT_SERVO = 5;
+
+    // CLIMB
     public static int WINCH_LEFT = 1;
     public static int WINCH_RIGHT = 6;
-    public static int BUTT_WHEEL = 7;
     public static int ELEVATOR = 2;
-
-    public static double ANGLE_TOLERANCE = 2.0;
+    
+    // BUTT WHEEL
+    public static int BUTT_WHEEL = 7;
   
   }
 
-  public static final class DIOConstants {
+  public static final class MathConstants {
 
-    // DIO
-    // public static int GRABBER_ENC_A = 1;
-    // public static int GRABBER_ENC_B = 0;
-    // public static int ARM_ENC_A = 6;
-    // public static int ARM_ENC_B = 7;
-    // public static int ELEVATOR_ENC_A = 2;
-    // public static int ELEVATOR_ENC_B = 3; 
+    public static double ANGLE_TOLERANCE = 2.0;
+
+  }
+
+  public static final class DIOConstants{
+    public static int ELEVATOR_ENC_A = 1;
+    public static int ELEVATOR_ENC_B = 2; 
     // public static int DIO_LIMITUP = 4;
     // public static int DIO_LIMITDOWN = 5;
 

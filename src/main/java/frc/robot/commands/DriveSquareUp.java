@@ -3,8 +3,6 @@ package frc.robot.commands;
 import com.revrobotics.Rev2mDistanceSensor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 /**
@@ -14,14 +12,14 @@ import frc.robot.subsystems.Drive;
 public class DriveSquareUp extends CommandBase {
 
   private Drive drive = RobotContainer.drivymcDriveDriverson;
-  private Rev2mDistanceSensor rightSensor = RobotContainer.drivymcDriveDriverson.rightDistanceSensor;
-  private Rev2mDistanceSensor leftSensor = RobotContainer.drivymcDriveDriverson.leftDistanceSensor;
+  private Rev2mDistanceSensor rightSensor = drive.rightDistanceSensor;
+  private Rev2mDistanceSensor leftSensor = drive.leftDistanceSensor;
   private int check = 0;
   private final double TOLERANCE = 0.2;
 
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(drive);
   }
 
   // Called just before this Command runs the first time
@@ -82,7 +80,7 @@ public class DriveSquareUp extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    drive.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

@@ -7,12 +7,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.RobotContainer;
 
 public class ClimbUp extends CommandBase {
+
+  private SpeedController winch = RobotContainer.climbymcClimbClimberson.winchMotors;
 
   public ClimbUp() {
     // Use requires() here to declare subsystem dependencies
@@ -29,8 +30,7 @@ public class ClimbUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.climbymcClimbClimberson.winchMotors.set(-0.70);
-    
+    winch.set(-0.70);  
         
   }
 
@@ -43,7 +43,7 @@ public class ClimbUp extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interupted) {
-    RobotContainer.climbymcClimbClimberson.winchMotors.set(0);
+    winch.set(0);
  }
 
 }

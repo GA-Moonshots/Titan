@@ -9,9 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ButtWheel;
 
@@ -60,8 +58,9 @@ public class ButtSpin extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-   if(spinToColor) return buttWheel.getColor().equals(gameData);
-   return count >= 28;
+    if(spinToColor) 
+      return buttWheel.getColor().equals(gameData);   // TODO: experiment with necessary offset
+    return count >= 28;
   }
 
   // Called once after isFinished returns true

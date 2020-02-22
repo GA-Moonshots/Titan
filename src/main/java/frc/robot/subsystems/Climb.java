@@ -8,10 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 import frc.robot.Constants;
 
 /**
@@ -20,16 +20,14 @@ import frc.robot.Constants;
 public class Climb extends SubsystemBase {
 
   // here's some motors
-  private Jaguar rightMotor = new Jaguar(Constants.DriveConstants.WINCH_RIGHT);
-  private Jaguar leftMotor = new Jaguar(Constants.DriveConstants.WINCH_LEFT);
-  private Jaguar elevatorMotor = new Jaguar(Constants.DriveConstants.ELEVATOR);
-  //private Jaguar rightMotor2 = new Jaguar(Constants.DriveConstants.WINCH_RIGHT);
-  //private Jaguar leftMotor2 = new Jaguar(Constants.DriveConstants.WINCH_LEFT);
+  private Jaguar rightMotor = new Jaguar(Constants.PWDConstants.WINCH_RIGHT);
+  private Jaguar leftMotor = new Jaguar(Constants.PWDConstants.WINCH_LEFT);
+  private Talon elevatorMotor = new Talon(Constants.PWDConstants.ELEVATOR);  
 
   public SpeedControllerGroup winchMotors;
   public SpeedControllerGroup elevatorMotorGroup;
-  
-  public Encoder encoder = new Encoder(1, 2);
+    
+  public Encoder encoder = new Encoder(Constants.DIOConstants.ELEVATOR_ENC_A, Constants.DIOConstants.ELEVATOR_ENC_B);
 
   
   public Climb(){    
@@ -38,7 +36,6 @@ public class Climb extends SubsystemBase {
     //leftMotor.setInverted(true);  
     winchMotors = new SpeedControllerGroup(rightMotor, leftMotor);
     elevatorMotorGroup = new SpeedControllerGroup(elevatorMotor);
-
-
+    
     }
   }

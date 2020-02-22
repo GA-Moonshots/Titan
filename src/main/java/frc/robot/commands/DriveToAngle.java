@@ -57,7 +57,7 @@ public class DriveToAngle extends CommandBase {
 
     // are we there yet? this is to avoid ping-ponging
     // plus we never stop the method unless our output is zero
-    if(Math.abs(error) < Constants.DriveConstants.ANGLE_TOLERANCE) check++;
+    if(Math.abs(error) < Constants.MathConstants.ANGLE_TOLERANCE) check++;
     if(check > ENOUGH_CHECKS) return 0.0;
 
     // determine the direction
@@ -86,7 +86,7 @@ public class DriveToAngle extends CommandBase {
   public boolean isFinished() {
     //return true; // disable this command since our gyro broke
     //
-    return check >= ENOUGH_CHECKS && Math.abs(drive.gyro.getRawAngle() - target) < Constants.DriveConstants.ANGLE_TOLERANCE;
+    return check >= ENOUGH_CHECKS && Math.abs(drive.gyro.getRawAngle() - target) < Constants.MathConstants.ANGLE_TOLERANCE;
 
     //
   }

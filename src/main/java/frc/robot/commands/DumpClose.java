@@ -8,9 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.BallDumper;
 /**
  * Responding to motor control. Runs infinitely
  */
@@ -31,6 +29,7 @@ public class DumpClose extends CommandBase {
   @Override
   public void execute() {
       RobotContainer.dumpymcDumpDumperson.servo1.setAngle(5);
+      RobotContainer.dumpymcDumpDumperson.servo2.setAngle(175);
       RobotContainer.dumpymcDumpDumperson.isDumpOpen = false;
     }
 
