@@ -28,8 +28,7 @@ public class DriveCommand extends CommandBase {
 
   // Called just before this Command runs the first time
   @Override
-  public void initialize() {
-    driveStraight = !driveStraight;    
+  public void initialize() { 
     this.driveStraightAt = drive.gyro.getRawAngle();
   }
 
@@ -80,27 +79,12 @@ public class DriveCommand extends CommandBase {
       valuerighty = 0;
     }    
     
-    
-    // // trigger assist driving straight 
-    // if(valuelefty < 0 && valueleftx == 0 && notMoving){
-    //   notMoving = false;
-    //   driveStraight = true;
-    //   this.driveStraightAt = RobotContainer.drivymcDriveDriverson.gyro.getAngle();
-    // }
-    // else if(valueleftx != 0){
-    //   notMoving = false;
-    //   driveStraight = false;
-    // }
-    // else if(valueleftx == 0 && valuelefty == 0){
-    //   notMoving = true;
-    //   driveStraight = false;
-    // }
 
-    if(true == false && Math.abs(valueleftx) > 0){
+    if(driveStraight && valuerightx == 0){
       double difference = driveStraightAt - drive.gyro.getRawAngle();
-      double power = -0.80;
-      if(valueleftx > 0) power = 0.80;
-      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, power); 
+      double maxPower = -0.80;
+      double turnAdjustment = difference/180 * maxPower;
+      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, turnAdjustment); 
     } else {
       drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
     }

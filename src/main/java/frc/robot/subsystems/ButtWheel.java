@@ -36,7 +36,19 @@ public class ButtWheel extends SubsystemBase {
    * the robot sees to what the game field's sensor sees.
    * @return color in a single character string
    */
-  public String getOffsetColor(){
+  public String getOffsetColor(String currentColor){
+    if(currentColor.equals("Y")){
+      return "G";
+    }
+    else if(currentColor.equals("B")){
+      return "R";
+    }
+    else if(currentColor.equals("R")){
+      return "B";
+    }
+    else if(currentColor.equals("G")){
+      return "Y";
+    }
     return "?";
   }
 

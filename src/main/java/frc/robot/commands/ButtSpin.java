@@ -59,7 +59,7 @@ public class ButtSpin extends CommandBase {
   @Override
   public boolean isFinished() {
     if(spinToColor) 
-      return buttWheel.getColor().equals(gameData);   // TODO: experiment with necessary offset
+      return buttWheel.getOffsetColor(buttWheel.getColor()).equals(gameData);
     return count >= 28;
   }
 
