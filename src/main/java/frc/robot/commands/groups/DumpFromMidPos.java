@@ -8,6 +8,9 @@ public class DumpFromMidPos extends SequentialCommandGroup {
     public DumpFromMidPos() {
         addCommands(
 
+            //Close dumper in case its open
+            new DumpClose(),
+            
             //Drive to wall
             new DriveToWall(),
             

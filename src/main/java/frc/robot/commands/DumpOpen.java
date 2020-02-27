@@ -28,8 +28,8 @@ public class DumpOpen extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.dumpymcDumpDumperson.servo1.setAngle(90);
-    RobotContainer.dumpymcDumpDumperson.servo2.setAngle(90);
+    RobotContainer.dumpymcDumpDumperson.servo1.setAngle(140);
+    RobotContainer.dumpymcDumpDumperson.servo2.setAngle(40);
     RobotContainer.dumpymcDumpDumperson.isDumpOpen = true;
     }
 
@@ -44,6 +44,8 @@ public class DumpOpen extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    //RobotContainer.dumpymcDumpDumperson.servo1.stopMotor();
+    //RobotContainer.dumpymcDumpDumperson.servo2.stopMotor();
   }
 
 }

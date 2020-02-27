@@ -15,7 +15,7 @@ public class DriveSquareUp extends CommandBase {
   private Rev2mDistanceSensor rightSensor = drive.rightDistanceSensor;
   private Rev2mDistanceSensor leftSensor = drive.leftDistanceSensor;
   private int check = 0;
-  private final double TOLERANCE = 0.2;
+  private final double TOLERANCE = .2;
 
   public DriveSquareUp() {
     // Use requires() here to declare subsystem dependencies
@@ -30,8 +30,8 @@ public class DriveSquareUp extends CommandBase {
   }
   private double notReallyPID() {
     // NOTE: Negative return values will increase the gyro's value
-    double MAX_POWER = 0.30; // cap the power 
-    double MIN_POWER = 0.15; // lowest effective power
+    double MAX_POWER = 0.35; // cap the power 
+    double MIN_POWER = 0.20; // lowest effective power
     int ENOUGH_CHECKS = 30; // how many times do we pass our target until we're satisfied?
     double right = rightSensor.getRange();
     double left = leftSensor.getRange();
@@ -55,13 +55,13 @@ public class DriveSquareUp extends CommandBase {
     // determine the direction
     // if I was trying to go a positive angle change from the start
     if(rightSensor.getRange() > leftSensor.getRange()){
-      if(error > 0) return -output; // move in a positive direction
-      else return output; // compensate for over-turning by going a negative direction
+      if(error > 0) return output; // move in a positive direction
+      else return -output; // compensate for over-turning by going a negative direction
     }
     // if I was trying to go a negative angle from the start
     else{
-      if(error > 0) return output; // move in a negative direction as intended
-      else return -output; // compensate for over-turning by moving a positive direction
+      if(error > 0) return -output; // move in a negative direction as intended
+      else return output; // compensate for over-turning by moving a positive direction
     }
   }
 

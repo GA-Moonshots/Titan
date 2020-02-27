@@ -22,7 +22,7 @@ public class ButtForwardSpin extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(.05);
+    RobotContainer.spinnymcSpinSpinnerson.buttMotorGroup.set(.25);
   }
 
   public boolean isFinished() {

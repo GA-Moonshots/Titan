@@ -54,7 +54,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
+    
     // BUILD AUTONOMOUS OPTIONS
     m_chooser.setDefaultOption("Drive Reverse", new DriveTimeReverse(5));
     m_chooser.setDefaultOption("Drive Forward", new DriveTimeForward(5));
@@ -89,19 +89,23 @@ public class RobotContainer {
 
     // A button
     new JoystickButton(XboxController, Button.kA.value)
-    .whenPressed(new DriveToAngle(180));
+    .whenPressed(new DriveToAngle(90));
 
     // Y button
     new JoystickButton(XboxController, Button.kY.value)
-    .whenPressed(new ButtSpin(true));
+    .whenPressed(new DriveToAngle(270));
 
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
-    .whenHeld(new ClimbElevatorUp()); 
+    .whenPressed(() -> {
+      drivymcDriveDriverson.gyroAssist = !drivymcDriveDriverson.gyroAssist;
+      drivymcDriveDriverson.driveStraightAt = drivymcDriveDriverson.gyro.getRawAngle();
+      SmartDashboard.putBoolean("gyroAssist", drivymcDriveDriverson.gyroAssist);
+    }); 
 
     // Left bumper
     new JoystickButton(XboxController, Button.kBumperLeft.value)
-    .whenHeld(new DriveSquareUp());
+    .whenPressed(new DumpOpen());
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)
@@ -120,35 +124,28 @@ public class RobotContainer {
     ///////////////////////////////////////////////////////////////////////////////////
 
     new JoystickButton(JoystickController, 1)
-    .whenPressed(new ClimbUp());
-
-    new JoystickButton(JoystickController, 2)
-    .whenPressed(new ClimbUp());
-
-    new JoystickButton(JoystickController, 3)
-    .whenPressed(new ClimbUp());
-
-    new JoystickButton(JoystickController, 4)
-    .whenPressed(new ButtSpin(true));
-
-    new JoystickButton(JoystickController, 5)
-    .whenHeld(new ClimbElevatorUp());
-
-    new JoystickButton(JoystickController, 6)
-    .whenHeld(new ClimbElevatorDown(false));
-
-    new JoystickButton(JoystickController, 12)
-    .whenHeld(new ClimbElevatorDown(true));
-
-    new JoystickButton(JoystickController, 7)
     .whenPressed(new ButtSpin(false));
 
-    new JoystickButton(JoystickController, 8)
-    .whenPressed(new DumpOpen());
+    new JoystickButton(JoystickController, 2)
+    .whenPressed(new ButtSpin(true));
 
-    new JoystickButton(JoystickController, 9)
-    .whenPressed(new DumpClose());
-    
+    new JoystickButton(JoystickController, 3)
+    .whenHeld(new ClimbElevatorUp());
+
+    new JoystickButton(JoystickController, 4)
+    .whenHeld(new ClimbElevatorDown(false));
+
+    new JoystickButton(JoystickController, 5)
+    .whileHeld(new ButtBackwardSpin());
+
+    new JoystickButton(JoystickController, 6)
+    .whenHeld(new ButtForwardSpin());
+
+    new JoystickButton(JoystickController, 7)
+    .whenHeld(new ClimbElevatorDown(true));
+
+    new JoystickButton(JoystickController, 11)
+    .whenHeld(new ClimbUp());
   }
 
 

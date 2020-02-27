@@ -17,8 +17,7 @@ import frc.robot.subsystems.Drive;
  */
 public class DriveCommand extends CommandBase {
 
-  private boolean driveStraight = false;
-  private double driveStraightAt;
+
   private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveCommand() {
@@ -29,7 +28,7 @@ public class DriveCommand extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() { 
-    this.driveStraightAt = drive.gyro.getRawAngle();
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -80,11 +79,11 @@ public class DriveCommand extends CommandBase {
     }    
     
 
-    if(driveStraight && valuerightx == 0){
-      double difference = driveStraightAt - drive.gyro.getRawAngle();
+    if(drive.gyroAssist && valuerightx == 0){
+      double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
       double maxPower = -0.80;
-      double turnAdjustment = difference/180 * maxPower;
-      drive.dMecanumDrive.driveCartesian(-valueleftx, valuelefty, turnAdjustment); 
+      double turnAdjustment = difference/90 * maxPower;
+      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment); 
     } else {
       drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
     }

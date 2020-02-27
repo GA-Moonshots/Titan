@@ -46,6 +46,10 @@ public class Drive extends SubsystemBase {
   public SpeedControllerGroup rightSide;
   public SpeedControllerGroup leftSide;
 
+  //gyro drive toggle
+  public double driveStraightAt;
+  public boolean gyroAssist = false;
+
   public Drive(){    
 
     gyro.reset();

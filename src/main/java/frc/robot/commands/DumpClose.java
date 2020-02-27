@@ -28,8 +28,8 @@ public class DumpClose extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-      RobotContainer.dumpymcDumpDumperson.servo1.setAngle(5);
-      RobotContainer.dumpymcDumpDumperson.servo2.setAngle(175);
+      RobotContainer.dumpymcDumpDumperson.servo1.setAngle(2);
+      RobotContainer.dumpymcDumpDumperson.servo2.setAngle(185);
       RobotContainer.dumpymcDumpDumperson.isDumpOpen = false;
     }
 

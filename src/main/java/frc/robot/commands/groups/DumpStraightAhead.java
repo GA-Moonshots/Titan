@@ -8,6 +8,9 @@ public class DumpStraightAhead extends SequentialCommandGroup {
     public DumpStraightAhead() {
         addCommands(
 
+            //Close dumper in case its open
+            new DumpClose(),
+            
             //Drive to wall
             new DriveToWall(),
 

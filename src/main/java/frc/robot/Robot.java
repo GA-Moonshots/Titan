@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.DumpClose;
 
 
 /**
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
     RobotContainer.timer.start();
     // instantiating the contatainer is controversial as we keep many of the subsystems as static
     container = new RobotContainer();
+    
 
     // camera thread
     new Thread(() -> {
@@ -62,7 +64,26 @@ public class Robot extends TimedRobot {
         outputStream.putFrame(output);
       }
     }).start();
-   
+
+    new Thread(() -> {
+      UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture();
+      camera2.setResolution(640, 480);
+
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("Blur 2", 640, 480);
+
+      Mat source = new Mat();
+      Mat output = new Mat();
+
+      while(!Thread.interrupted()) {
+        if (cvSink.grabFrame(source) == 1) {
+          continue;
+        }
+        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+        outputStream.putFrame(output);
+      }
+    }).start();
+
   }
 
   /**
@@ -145,6 +166,7 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+    CommandScheduler.getInstance().schedule(new DumpClose());
    
   }
 
