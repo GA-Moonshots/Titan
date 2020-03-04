@@ -105,7 +105,10 @@ public class RobotContainer {
 
     // Left bumper
     new JoystickButton(XboxController, Button.kBumperLeft.value)
-    .whenPressed(new DumpOpen());
+    .whenPressed(() -> {
+      drivymcDriveDriverson.superCareful = !drivymcDriveDriverson.superCareful;
+      SmartDashboard.putBoolean("superCareful", drivymcDriveDriverson.superCareful);
+    });
 
     // Left Stick
     new JoystickButton(XboxController, Button.kStickLeft.value)

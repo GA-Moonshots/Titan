@@ -50,6 +50,9 @@ public class Drive extends SubsystemBase {
   public double driveStraightAt;
   public boolean gyroAssist = false;
 
+  //super careful extra precise mode
+  public boolean superCareful = false;
+
   public Drive(){    
 
     gyro.reset();

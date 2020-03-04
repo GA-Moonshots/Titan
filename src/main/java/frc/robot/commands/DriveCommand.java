@@ -79,12 +79,22 @@ public class DriveCommand extends CommandBase {
     }    
     
 
-    if(drive.gyroAssist && valuerightx == 0){
+    if(valueleftx != 0){
+      double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
+      double maxPower = -0.80;
+      double turnAdjustment = difference/90 * maxPower;
+      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment);
+    }
+    /*else if(drive.gyroAssist && valuerightx == 0){
       double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
       double maxPower = -0.80;
       double turnAdjustment = difference/90 * maxPower;
       drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment); 
-    } else {
+    } */
+    else if(drive.superCareful){
+      drive.dMecanumDrive.driveCartesian(.2 * valueleftx, .2 * valuelefty, .2 * -valuerightx);
+    } 
+    else{
       drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
     }
 
