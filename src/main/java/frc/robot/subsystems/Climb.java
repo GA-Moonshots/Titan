@@ -20,8 +20,7 @@ import frc.robot.Constants;
 public class Climb extends SubsystemBase {
 
   // here's some motors
-  private Jaguar rightMotor = new Jaguar(Constants.PWDConstants.WINCH_RIGHT);
-  private Jaguar leftMotor = new Jaguar(Constants.PWDConstants.WINCH_LEFT);
+  private Jaguar winchMotor = new Jaguar(Constants.PWDConstants.WINCH);
   private Talon elevatorMotor = new Talon(Constants.PWDConstants.ELEVATOR);  
 
   public SpeedControllerGroup winchMotors;
@@ -34,7 +33,7 @@ public class Climb extends SubsystemBase {
     // PID STUFF: https://frc-pdr.readthedocs.io/en/latest/control/using_WPILIB's_pid_controller.html#implementing-a-basic-pid-control
     // linking motors to ports
     //leftMotor.setInverted(true);  
-    winchMotors = new SpeedControllerGroup(rightMotor, leftMotor);
+    winchMotors = new SpeedControllerGroup(winchMotor);
     elevatorMotorGroup = new SpeedControllerGroup(elevatorMotor);
     
     }
