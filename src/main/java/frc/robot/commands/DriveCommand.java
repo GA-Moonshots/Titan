@@ -79,7 +79,7 @@ public class DriveCommand extends CommandBase {
     }    
     
 
-    if(valueleftx != 0){
+    if(valueleftx >= 0.75){
       double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
       double maxPower = -0.80;
       double turnAdjustment = difference/90 * maxPower;

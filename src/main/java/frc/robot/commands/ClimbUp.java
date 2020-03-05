@@ -30,7 +30,7 @@ public class ClimbUp extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    winch.set(0.2);  
+    winch.set(0.8);  
         
   }
 
