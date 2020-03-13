@@ -9,8 +9,6 @@ public class DumpFromFarPos extends SequentialCommandGroup {
     public DumpFromFarPos() {
         addCommands(
 
-            //Close dumper in case its open
-            new DumpClose(),
             //Go forward
             new DriveToWall(),
             //Align with the wall

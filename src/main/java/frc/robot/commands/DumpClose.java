@@ -37,7 +37,7 @@ public class DumpClose extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.dumpymcDumpDumperson.servo1.getAngle() <= 5;
+    return RobotContainer.dumpymcDumpDumperson.servo1.getAngle() <= 5 && RobotContainer.dumpymcDumpDumperson.servo2.getAngle() >= 185;
   }
 
   // Called once after isFinished returns true

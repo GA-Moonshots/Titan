@@ -17,7 +17,7 @@ import frc.robot.subsystems.Drive;
  */
 public class DriveCommand extends CommandBase {
 
-
+  private final double SLOW_CONST = .2;
   private Drive drive = RobotContainer.drivymcDriveDriverson;
 
   public DriveCommand() {
@@ -77,25 +77,25 @@ public class DriveCommand extends CommandBase {
     if(Math.abs(valuerighty) < dead){
       valuerighty = 0;
     }    
-    
 
-    if(valueleftx >= 0.75){
+    if(valueleftx == 0 && valuelefty == 0 && drive.gyroAssist) drive.disengageDriveAssist();
+    else if((valueleftx != 0 || valuelefty != 0) && !drive.gyroAssist) drive.engageDriveAssist();
+
+    if(drive.gyroAssist){
       double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
       double maxPower = -0.80;
       double turnAdjustment = difference/90 * maxPower;
-      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment);
+      if(drive.superCareful){
+        drive.dMecanumDrive.driveCartesian(SLOW_CONST * valueleftx, SLOW_CONST * valuelefty, turnAdjustment);
+      }
+      else drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment);
     }
-    /*else if(drive.gyroAssist && valuerightx == 0){
-      double difference = drive.driveStraightAt - drive.gyro.getRawAngle();
-      double maxPower = -0.80;
-      double turnAdjustment = difference/90 * maxPower;
-      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, turnAdjustment); 
-    } */
-    else if(drive.superCareful){
-      drive.dMecanumDrive.driveCartesian(.2 * valueleftx, .2 * valuelefty, .2 * -valuerightx);
-    } 
+
     else{
-      drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
+      if(drive.superCareful){
+        drive.dMecanumDrive.driveCartesian(SLOW_CONST * valueleftx, SLOW_CONST * valuelefty, SLOW_CONST * -valuerightx);
+      } 
+      else drive.dMecanumDrive.driveCartesian(valueleftx, valuelefty, -valuerightx);
     }
 
 

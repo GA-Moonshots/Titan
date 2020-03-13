@@ -9,40 +9,46 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drive;
 
 
 public class DriveToWall extends CommandBase {
 
+  private Drive drive = RobotContainer.drivymcDriveDriverson;
+  private int count = 0;
+
   public DriveToWall() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.drivymcDriveDriverson);
+    addRequirements(drive);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-  
+    count = 0;
     
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, -0.2, 0);
+    if ((drive.rightDistanceSensor.isRangeValid() && drive.rightDistanceSensor.getRange() < 10) || (drive.leftDistanceSensor.isRangeValid() && drive.leftDistanceSensor.getRange() < 10)){
+      count++;
+      System.out.println("I see a wall...?");
+    } 
+    drive.dMecanumDrive.driveCartesian(0, -0.2, 0);
      }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    if(RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid() || RobotContainer.drivymcDriveDriverson.rightDistanceSensor.isRangeValid())
-    return RobotContainer.drivymcDriveDriverson.rightDistanceSensor.getRange() < 20 || RobotContainer.drivymcDriveDriverson.leftDistanceSensor.getRange() < 20;
-    else return false;
+    return count > 3;
   }
 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
+    drive.dMecanumDrive.driveCartesian(0, 0, 0);
   }
 
 }

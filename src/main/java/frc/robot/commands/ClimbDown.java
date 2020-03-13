@@ -7,45 +7,44 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-/**
- * Responding to motor control. Runs infinitely
- */
 
-public class DumpOpen extends CommandBase {
+public class ClimbDown extends CommandBase {
 
-  public DumpOpen() {
+  private SpeedController winch = RobotContainer.climbymcClimbClimberson.winchMotors;
+
+  public ClimbDown() {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(RobotContainer.dumpymcDumpDumperson);
+
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    
   }
 
+  
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    RobotContainer.dumpymcDumpDumperson.servo1.setAngle(140);
-    RobotContainer.dumpymcDumpDumperson.servo2.setAngle(40);
-    RobotContainer.dumpymcDumpDumperson.isDumpOpen = true;
-    }
-
+    winch.set(-0.3);  
+        
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return RobotContainer.dumpymcDumpDumperson.servo1.getAngle() >= 140 && RobotContainer.dumpymcDumpDumperson.servo2.getAngle() <= 40;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.drivymcDriveDriverson.dMecanumDrive.driveCartesian(0, 0, 0);
-    //RobotContainer.dumpymcDumpDumperson.servo1.stopMotor();
-    //RobotContainer.dumpymcDumpDumperson.servo2.stopMotor();
-  }
+  public void end(boolean interupted) {
+    winch.set(0);
+ }
 
 }
+

@@ -46,6 +46,7 @@ public class RobotContainer {
   public static Timer timer = new Timer();
   
   SendableChooser<CommandBase> m_chooser = new SendableChooser<>();
+  SendableChooser<CommandBase> winch_chooser = new SendableChooser<>();
 
 
   /**
@@ -63,6 +64,8 @@ public class RobotContainer {
     m_chooser.addOption("Dump is far away", new DumpFromFarPos());
     m_chooser.addOption("Dump them cells at a medium distance", new DumpFromMidPos());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    SmartDashboard.putData("Pull winch back", new ClimbDown());
 
     // SET DEFAULT COMMANDS
     drivymcDriveDriverson.setDefaultCommand(new DriveCommand());
@@ -98,9 +101,6 @@ public class RobotContainer {
     // Right bumper
     new JoystickButton(XboxController, Button.kBumperRight.value)
     .whenPressed(() -> {
-      drivymcDriveDriverson.gyroAssist = !drivymcDriveDriverson.gyroAssist;
-      drivymcDriveDriverson.driveStraightAt = drivymcDriveDriverson.gyro.getRawAngle();
-      SmartDashboard.putBoolean("gyroAssist", drivymcDriveDriverson.gyroAssist);
     }); 
 
     // Left bumper

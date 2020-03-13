@@ -88,4 +88,13 @@ public class Drive extends SubsystemBase {
     return this.backLeft.get() != 0 || this.backRight.get() != 0 || this.frontLeft.get() != 0 || this.frontRight.get() != 0;
   }
 
+  public void engageDriveAssist(){
+    this.gyroAssist = true;
+    this.driveStraightAt = this.gyro.getRawAngle();
+  }
+
+  public void disengageDriveAssist(){
+    this.gyroAssist = false;
+    }
+
 }
